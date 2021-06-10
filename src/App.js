@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import Quora from './components/Quora';
-import Book from './components/Book';
+import Quora from './components/Quora/Quora';
+import Book from './components/Book/Book';
 import SpiCpi from './components/SpiCpi';
 import Home from './components/Home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
