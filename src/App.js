@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import Quora from './components/Quora/Quora';
 import Book from './components/Book/Book';
 import SpiCpi from './components/SpiCpi';
 import Home from './components/Home';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import QuoraMain from './components/Quora/QuoraMain';
 
 function App() {
     return (
@@ -13,8 +13,8 @@ function App() {
                 <Route exact path="/">
                     <Home />
                 </Route>
-                <Route exact path="/quora">
-                    <Quora />
+                <Route exact path="/quoramain">
+                    <QuoraMain />
                 </Route>
                 <Route exact path="/book">
                     <Book />
