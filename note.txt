@@ -28,3 +28,18 @@
 > const dispatch = useDispatch();
     -   This hook returns a reference to the dispatch function from the Redux store. 
         You may use it to dispatch actions as needed.
+
+> createSlice#
+    -   A function that accepts an initial state, 
+        an object full of reducer functions, and a "slice name", and automatically    
+    -   generates action creators and action types that correspond to the reducers and state.
+    -   This API is the standard approach for writing Redux logic.
+    -   Internally, it uses createAction and createReducer, 
+        so you may also use Immer to write "mutating" immutable updates
+
+> why we use store.js ?
+    -   A store holds the whole state tree of your application. 
+        The only way to change the state inside it is to dispatch an action on it.
+
+    -   A store is not a class. It's just an object with a few methods on it. 
+        To create it, pass your root reducing function to createStore.
