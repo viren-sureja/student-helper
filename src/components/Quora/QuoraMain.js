@@ -20,7 +20,7 @@ function QuoraMain() {
                         photo: authUser.photoURL,
                     })
                 );
-                console.log(authUser);
+                // console.log(authUser);
             } else {
                 dispatch(logout());
             }

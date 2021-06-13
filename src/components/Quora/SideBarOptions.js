@@ -41,7 +41,7 @@ function SideBarOptions() {
     return (
         <div className="sidebarOptions">
             {topics.map(topic => (
-                <div className="sidebarOption">
+                <div key={topic.category} className="sidebarOption">
                     <img src={topic.imgSrc} alt="" />
                     <p>{topic.category}</p>
                 </div>
