@@ -1,10 +1,10 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Book from './components/Book/Book';
-import SpiCpi from './components/SpiCpi';
 import Home from './components/Home';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import QuoraMain from './components/Quora/QuoraMain';
+import SpiCpi from './components/SpiCpi';
 
 function App() {
     return (
