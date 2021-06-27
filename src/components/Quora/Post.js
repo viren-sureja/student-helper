@@ -191,14 +191,14 @@ function Post({ Id, question, imageUrl, timestamp, users }) {
                         </p>
                     ))}
                 </div>
-                <img
-                    src={
-                        imageUrl
-                            ? imageUrl
-                            : 'https://stockpictures.io/wp-content/uploads/2020/01/image-not-found-big.png'
-                    }
-                    alt="QuestionImage was not added while posting the question"
-                />
+                {imageUrl ? (
+                    <img
+                        src={imageUrl}
+                        alt="QuestionImage was not added while posting the question"
+                    />
+                ) : (
+                    ''
+                )}
             </div>
             <div className="post__footer">
                 <div className="post__footerAction">

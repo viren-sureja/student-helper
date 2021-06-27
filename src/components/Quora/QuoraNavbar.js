@@ -7,6 +7,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import NotificationsOutlinedIcon from '@material-ui/icons/NotificationsOutlined';
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
 import SearchIcon from '@material-ui/icons/Search';
+import axios from 'axios';
 import firebase from 'firebase';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
@@ -15,6 +16,10 @@ import '../../css/Quora/QuoraNavbar.css';
 import { selectUser } from '../../features/userSlice';
 import db, { auth } from '../../firebase';
 
+require('dotenv').config();
+// const cloudinary = require('cloudinary').v2;
+// console.log(cloudinary.config().cloud_name);
+
 Modal.setAppElement('#root');
 
 function QuoraNavbar() {
@@ -22,11 +27,29 @@ function QuoraNavbar() {
     const [openModal, setOpenModal] = useState(false);
     const [input, setInput] = useState('');
     const [inputUrl, setInputUrl] = useState('');
+    const [imageSelected, setImageSelected] = useState('');
 
     const questionName = input;
     const handleQuestion = e => {
         e.preventDefault();
         setOpenModal(false);
+
+        if (inputUrl === '' && imageSelected !== '') {
+            // console.log(imageSelected);
+
+            const formData = new FormData();
+            formData.append('file', imageSelected);
+            formData.append('upload_preset', 'without_signed');
+
+            // console.log(formData);
+
+            axios
+                .post(
+                    'https://api.cloudinary.com/v1_1/shiva3/image/upload',
+                    formData
+                )
+                .then(res => setInputUrl(res.data.secure_url));
+        }
 
         if (questionName) {
             db.collection('questions').add({
@@ -39,6 +62,7 @@ function QuoraNavbar() {
 
         setInput('');
         setInputUrl('');
+        setImageSelected('');
     };
 
     return (
@@ -140,6 +164,21 @@ function QuoraNavbar() {
                                 placeholder="Optional: inclue a link that gives context"
                             ></input>
                         </div>
+                        <div className="modal__imageUpload">
+                            <label className="upload image">
+                                Upload Image:
+                            </label>
+                            <input
+                                type="file"
+                                id="img"
+                                name="img"
+                                accept="image/*"
+                                // value={imageSelected.name}
+                                onChange={e =>
+                                    setImageSelected(e.target.files[0])
+                                }
+                            />
+                        </div>
                     </div>
                     <div className="modal__buttons">
                         <button
@@ -149,6 +188,7 @@ function QuoraNavbar() {
                             Cancel
                         </button>
                         <button
+                            disabled={questionName === ''}
                             type="sumbit"
                             onClick={handleQuestion}
                             className="add"
