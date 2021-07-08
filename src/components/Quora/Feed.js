@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../css/Quora/Feed.css';
 import db from '../../firebase';
 import Post from './Post';
-import QuoraBox from './QuoraBox';
+// import QuoraBox from './QuoraBox';
 
 function Feed() {
     const [posts, setPosts] = useState([]);
@@ -22,7 +22,7 @@ function Feed() {
 
     return (
         <div className="feed">
-            <QuoraBox />
+            {/* <QuoraBox /> */}
             {posts.map(({ id, questions }) => (
                 <Post
                     key={id}

@@ -1,9 +1,8 @@
 import { Avatar } from '@material-ui/core';
-import { MoreHorizOutlined, ShareOutlined } from '@material-ui/icons';
+import { MoreHorizOutlined } from '@material-ui/icons';
 import ArrowDownwardOutlinedIcon from '@material-ui/icons/ArrowDownwardOutlined';
 import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
-import RepeatOutlinedIcon from '@material-ui/icons/RepeatOutlined';
 import firebase from 'firebase';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
@@ -86,12 +85,7 @@ function Post({ Id, question, imageUrl, timestamp, users }) {
             <div className="post__body">
                 <div className="post__question">
                     <p>{question}</p>
-                    <button
-                        onClick={() => setIsModalOpen(true)}
-                        className="post__btnAnswer"
-                    >
-                        Answer
-                    </button>
+
                     <Modal
                         isOpen={IsmodalOpen}
                         onRequestClose={() => setIsModalOpen(false)}
@@ -152,53 +146,61 @@ function Post({ Id, question, imageUrl, timestamp, users }) {
                         </div>
                     </Modal>
                 </div>
-                <div className="post__answer">
-                    {getAnswers.map(({ id, answers }) => (
-                        <p
-                            key={id}
-                            style={{
-                                position: 'relative',
-                                paddingBottom: '5px',
-                            }}
-                        >
-                            {Id === answers.questionId ? (
-                                <span>
-                                    {answers.answer}
-                                    <br />
-                                    <span
-                                        style={{
-                                            position: 'absolute',
-                                            color: 'gray',
-                                            fontSize: 'small',
-                                            display: 'flex',
-                                            right: '0px',
-                                        }}
-                                    >
-                                        <span style={{ color: '#b92b27' }}>
-                                            {answers.user.displayName
-                                                ? answers.user.displayName
-                                                : answers.user.email}{' '}
-                                            on{' '}
-                                            {new Date(
-                                                answers.timestamp?.toDate()
-                                            ).toLocaleString()}
-                                        </span>
-                                    </span>
-                                </span>
-                            ) : (
-                                ''
-                            )}
-                        </p>
-                    ))}
-                </div>
-                {imageUrl ? (
+
+                {imageUrl && (
                     <img
                         src={imageUrl}
                         alt="QuestionImage was not added while posting the question"
                     />
-                ) : (
-                    ''
                 )}
+                <div className="post__answer">
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="post__btnAnswer"
+                    >
+                        Answer
+                    </button>
+
+                    {getAnswers.map(({ id, answers }) => (
+                        <span key={id} className="border__bottom">
+                            <p
+                                key={id}
+                                style={{
+                                    position: 'relative',
+                                    paddingBottom: '5px',
+                                }}
+                            >
+                                {Id === answers.questionId ? (
+                                    <span>
+                                        {answers.answer}
+                                        <br />
+                                        <span
+                                            style={{
+                                                position: 'absolute',
+                                                color: 'gray',
+                                                fontSize: 'small',
+                                                display: 'flex',
+                                                right: '0px',
+                                            }}
+                                        >
+                                            <span style={{ color: '#b92b27' }}>
+                                                {answers.user.displayName
+                                                    ? answers.user.displayName
+                                                    : answers.user.email}{' '}
+                                                on{' '}
+                                                {new Date(
+                                                    answers.timestamp?.toDate()
+                                                ).toLocaleString()}
+                                            </span>
+                                        </span>
+                                    </span>
+                                ) : (
+                                    ''
+                                )}
+                            </p>
+                        </span>
+                    ))}
+                </div>
             </div>
             <div className="post__footer">
                 <div className="post__footerAction">
@@ -206,10 +208,12 @@ function Post({ Id, question, imageUrl, timestamp, users }) {
                     <ArrowDownwardOutlinedIcon />
                 </div>
 
-                <RepeatOutlinedIcon />
+                {/* <RepeatOutlinedIcon /> */}
+
                 <ChatBubbleOutlineOutlinedIcon />
+
                 <div className="post__footerLeft">
-                    <ShareOutlined />
+                    {/* <ShareOutlined /> */}
                     <MoreHorizOutlined />
                 </div>
             </div>

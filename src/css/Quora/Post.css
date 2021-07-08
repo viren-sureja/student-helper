@@ -46,8 +46,17 @@
 .post__footer {
     display: flex;
 }
-
-.post__question > .post__btnAnswer {
+.post__answer {
+    border-top: 1px black dashed;
+    margin-top: 10px;
+}
+.border__bottom {
+    border-bottom: 1px lightgrey solid;
+}
+.post__answer > .post__btnAnswer {
+    margin-top: 10px;
+    display: flex;
+    /* right: 0; */
     margin-left: auto;
     cursor: pointer;
     padding: 7px;
@@ -75,6 +84,7 @@
 
 .post__body > img {
     width: 100%;
+    height: 400px;
     object-fit: contain;
     background-color: rgb(238, 238, 238);
     border-radius: 5px;

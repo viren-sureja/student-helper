@@ -1,9 +1,9 @@
 import { Avatar, Button, Input } from '@material-ui/core';
 import { ExpandMore, Link } from '@material-ui/icons';
-import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
-import FeaturedPlayListOutlinedIcon from '@material-ui/icons/FeaturedPlayListOutlined';
+// import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
+// import FeaturedPlayListOutlinedIcon from '@material-ui/icons/FeaturedPlayListOutlined';
 import HomeIcon from '@material-ui/icons/Home';
-import LanguageIcon from '@material-ui/icons/Language';
+// import LanguageIcon from '@material-ui/icons/Language';
 import NotificationsOutlinedIcon from '@material-ui/icons/NotificationsOutlined';
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
 import SearchIcon from '@material-ui/icons/Search';
@@ -35,7 +35,7 @@ function QuoraNavbar() {
         setOpenModal(false);
 
         if (inputUrl === '' && imageSelected !== '') {
-            // console.log(imageSelected);
+            // console.log(imageSelected, inputUrl);
 
             const formData = new FormData();
             formData.append('file', imageSelected);
@@ -48,18 +48,50 @@ function QuoraNavbar() {
                     'https://api.cloudinary.com/v1_1/shiva3/image/upload',
                     formData
                 )
-                .then(res => setInputUrl(res.data.secure_url));
+                .then(res => {
+                    if (questionName) {
+                        db.collection('questions').add({
+                            user: user,
+                            question: input,
+                            imageUrl: res.data.secure_url,
+                            timestamp:
+                                firebase.firestore.FieldValue.serverTimestamp(),
+                        });
+                    }
+                });
+        } else {
+            if (questionName) {
+                db.collection('questions').add({
+                    user: user,
+                    question: input,
+                    imageUrl: inputUrl,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                });
+            }
         }
+    };
 
-        if (questionName) {
-            db.collection('questions').add({
-                user: user,
-                question: input,
-                imageUrl: inputUrl,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            });
-        }
+    const customStyle = {
+        overlay: {
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(0,0,0,0.8)',
+            zIndex: '1000',
+        },
+        content: {
+            height: '60%',
+            width: '50%',
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+        },
+    };
 
+    const addQuestionNavbar = () => {
+        setOpenModal(true);
         setInput('');
         setInputUrl('');
         setImageSelected('');
@@ -74,12 +106,12 @@ function QuoraNavbar() {
                 <div className="qHeader__icon">
                     <HomeIcon />
                 </div>
-                <div className="qHeader__icon">
+                {/* <div className="qHeader__icon">
                     <FeaturedPlayListOutlinedIcon />
-                </div>
-                <div className="qHeader__icon">
+                </div> */}
+                {/* <div className="qHeader__icon">
                     <AssignmentTurnedInOutlinedIcon />
-                </div>
+                </div> */}
                 <div className="qHeader__icon">
                     <PeopleAltOutlinedIcon />
                 </div>
@@ -103,30 +135,20 @@ function QuoraNavbar() {
                         }
                     />
                 </div>
-                <LanguageIcon />
-                <Button onClick={() => setOpenModal(true)}>Add Question</Button>
+                {/* <LanguageIcon /> */}
+                <Button onClick={addQuestionNavbar}>Add Question</Button>
 
                 {/* modal starts here */}
                 <Modal
                     isOpen={openModal}
                     onRequestClose={() => setOpenModal(false)}
-                    shouldCloseOnOverlayClick={false}
-                    style={{
-                        overlay: {
-                            width: 700,
-                            height: 600,
-                            backgroundColor: 'rgba(0,0,0,0.8)',
-                            zIndex: '1000',
-                            top: '50%',
-                            left: '50%',
-                            marginTop: '-300px',
-                            marginLeft: '-350px',
-                        },
-                    }}
+                    shouldCloseOnOverlayClick={true}
+                    style={customStyle}
                 >
                     <div className="modal__title">
                         <h5>Add Question</h5>
                         <h5>Share Link</h5>
+                        <h5>Upload Image</h5>
                     </div>
                     <div className="modal__info">
                         <Avatar
@@ -139,7 +161,7 @@ function QuoraNavbar() {
                         />
                         <p>
                             {user.displayName ? user.displayName : user.email}{' '}
-                            asked
+                            is asking in
                         </p>
                         <div className="modal__scope">
                             <PeopleAltOutlinedIcon />

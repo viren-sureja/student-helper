@@ -3,7 +3,7 @@ import '../../css/Quora/Quora.css';
 import Feed from './Feed';
 import QuoraNavbar from './QuoraNavbar';
 import Sidebar from './Sidebar';
-import Widget from './Widget';
+// import Widget from './Widget';
 
 function Quora() {
     return (
@@ -12,7 +12,7 @@ function Quora() {
             <div className="quora__content">
                 <Sidebar />
                 <Feed />
-                <Widget />
+                {/* <Widget /> */}
             </div>
         </div>
     );
