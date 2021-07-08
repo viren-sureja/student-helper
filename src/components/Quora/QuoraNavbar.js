@@ -56,6 +56,8 @@ function QuoraNavbar() {
                             imageUrl: res.data.secure_url,
                             timestamp:
                                 firebase.firestore.FieldValue.serverTimestamp(),
+                            upVote: 0,
+                            downVote: 0,
                         });
                     }
                 });
@@ -66,6 +68,8 @@ function QuoraNavbar() {
                     question: input,
                     imageUrl: inputUrl,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    upVote: 0,
+                    downVote: 0,
                 });
             }
         }

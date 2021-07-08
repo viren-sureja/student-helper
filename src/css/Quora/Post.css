@@ -98,11 +98,11 @@
     cursor: pointer;
 }
 
-.post__footerAction {
+.post__footerAction > button {
     background-color: lightgray;
     padding: 5px;
     align-items: center;
-    display: flex;
+    /* display: flex; */
     justify-content: space-around;
     border-radius: 33px;
 }

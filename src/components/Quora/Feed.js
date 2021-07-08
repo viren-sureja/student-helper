@@ -31,6 +31,8 @@ function Feed() {
                     imageUrl={questions.imageUrl}
                     timestamp={questions.timestamp}
                     users={questions.user}
+                    upVote={questions.upVote}
+                    downVote={questions.downVote}
                 />
             ))}
         </div>

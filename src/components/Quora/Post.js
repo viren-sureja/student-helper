@@ -2,7 +2,7 @@ import { Avatar } from '@material-ui/core';
 import { MoreHorizOutlined } from '@material-ui/icons';
 import ArrowDownwardOutlinedIcon from '@material-ui/icons/ArrowDownwardOutlined';
 import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined';
-import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
+// import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import firebase from 'firebase';
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
@@ -15,7 +15,26 @@ import {
 import { selectUser } from '../../features/userSlice';
 import db from '../../firebase';
 
-function Post({ Id, question, imageUrl, timestamp, users }) {
+const customStyle = {
+    overlay: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'rgba(0,0,0,0.8)',
+        zIndex: '1000',
+    },
+    content: {
+        height: '60%',
+        width: '40%',
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+    },
+};
+
+function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
     const user = useSelector(selectUser);
     const dispatch = useDispatch();
 
@@ -23,6 +42,8 @@ function Post({ Id, question, imageUrl, timestamp, users }) {
     const questionId = useSelector(selectQuestionId);
     const [answer, setAnswer] = useState('');
     const [getAnswers, setGetAnswers] = useState([]);
+    const [upvote, setUpvote] = useState(upVote);
+    const [downvote, setDownvote] = useState(downVote);
 
     useEffect(() => {
         if (questionId) {
@@ -59,6 +80,29 @@ function Post({ Id, question, imageUrl, timestamp, users }) {
         setAnswer('');
         setIsModalOpen(false);
     };
+
+    const handleUpVote = () => {
+        setUpvote(upvote + 1);
+        // console.log(upvote);
+
+        db.collection('questions')
+            .doc(Id)
+            .update({
+                upVote: upvote + 1,
+            });
+    };
+
+    const handleDownVote = () => {
+        setDownvote(downvote + 1);
+        // console.log(downvote);
+
+        db.collection('questions')
+            .doc(Id)
+            .update({
+                downVote: downvote + 1,
+            });
+    };
+
     return (
         <div
             className="post"
@@ -90,18 +134,7 @@ function Post({ Id, question, imageUrl, timestamp, users }) {
                         isOpen={IsmodalOpen}
                         onRequestClose={() => setIsModalOpen(false)}
                         shouldCloseOnOverlayClick={false}
-                        style={{
-                            overlay: {
-                                width: 680,
-                                height: 550,
-                                backgroundColor: 'rgba(0,0,0,0.8)',
-                                zIndex: '1000',
-                                top: '50%',
-                                left: '50%',
-                                marginTop: '-250px',
-                                marginLeft: '-350px',
-                            },
-                        }}
+                        style={customStyle}
                     >
                         <div className="modal__question">
                             <h1>{question}</h1>
@@ -204,13 +237,19 @@ function Post({ Id, question, imageUrl, timestamp, users }) {
             </div>
             <div className="post__footer">
                 <div className="post__footerAction">
-                    <ArrowUpwardOutlinedIcon />
-                    <ArrowDownwardOutlinedIcon />
+                    <button className="upwardArrow" onClick={handleUpVote}>
+                        <ArrowUpwardOutlinedIcon />
+                        {upvote}
+                    </button>
+                    <button className="downwardArrow" onClick={handleDownVote}>
+                        <ArrowDownwardOutlinedIcon />
+                        {downvote}
+                    </button>
                 </div>
 
                 {/* <RepeatOutlinedIcon /> */}
 
-                <ChatBubbleOutlineOutlinedIcon />
+                {/* <ChatBubbleOutlineOutlinedIcon /> */}
 
                 <div className="post__footerLeft">
                     {/* <ShareOutlined /> */}
