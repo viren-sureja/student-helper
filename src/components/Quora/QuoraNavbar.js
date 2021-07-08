@@ -1,5 +1,5 @@
 import { Avatar, Button, Input } from '@material-ui/core';
-import { ExpandMore, Link } from '@material-ui/icons';
+import { ExpandMore, Link, TramOutlined } from '@material-ui/icons';
 // import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
 // import FeaturedPlayListOutlinedIcon from '@material-ui/icons/FeaturedPlayListOutlined';
 import HomeIcon from '@material-ui/icons/Home';
@@ -28,6 +28,7 @@ function QuoraNavbar() {
     const [input, setInput] = useState('');
     const [inputUrl, setInputUrl] = useState('');
     const [imageSelected, setImageSelected] = useState('');
+    const [tags, setTags] = useState([]);
 
     const questionName = input;
     const handleQuestion = e => {
@@ -58,6 +59,7 @@ function QuoraNavbar() {
                                 firebase.firestore.FieldValue.serverTimestamp(),
                             upVote: 0,
                             downVote: 0,
+                            tags: tags,
                         });
                     }
                 });
@@ -70,6 +72,7 @@ function QuoraNavbar() {
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     upVote: 0,
                     downVote: 0,
+                    tags: tags,
                 });
             }
         }
@@ -83,7 +86,7 @@ function QuoraNavbar() {
             zIndex: '1000',
         },
         content: {
-            height: '60%',
+            height: '80%',
             width: '50%',
             top: '50%',
             left: '50%',
@@ -99,6 +102,27 @@ function QuoraNavbar() {
         setInput('');
         setInputUrl('');
         setImageSelected('');
+        setTags([]);
+    };
+
+    const handleTags = tag => {
+        let arr = tags;
+        let flag = true;
+
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === tag) {
+                arr.splice(i, 1);
+                i--;
+                flag = false;
+            }
+        }
+
+        if (flag) {
+            arr.push(tag);
+        }
+
+        setTags(arr);
+        console.log(arr);
     };
 
     return (
@@ -205,6 +229,68 @@ function QuoraNavbar() {
                                 }
                             />
                         </div>
+                    </div>
+                    <div className="university">
+                        <input type="text" />
+                    </div>
+                    <div class="tag-wrapper">
+                        <p>click the tags</p>
+                        <div class="tag">
+                            <input
+                                type="checkbox"
+                                onClick={() => handleTags('placement')}
+                            />
+                            <label for="">Placement</label>
+                            {/* <i class="fa fa-plus"></i>
+                            <i class="fa fa-check"></i> */}
+                        </div>
+
+                        <div class="tag">
+                            <input
+                                type="checkbox"
+                                onClick={() => handleTags('academics')}
+                            />
+                            <label for="">Academics</label>
+                            {/* <i class="fa fa-plus"></i>
+                            <i class="fa fa-check"></i> */}
+                        </div>
+
+                        <div class="tag">
+                            <input
+                                type="checkbox"
+                                onClick={() => handleTags('fest')}
+                            />
+                            <label for="">Fest</label>
+                            {/* <i class="fa fa-plus"></i>
+                            <i class="fa fa-check"></i> */}
+                        </div>
+
+                        <div class="tag">
+                            <input
+                                type="checkbox"
+                                onClick={() => handleTags('generalInfo')}
+                            />
+                            <label for="">General info</label>
+                            {/* <i class="fa fa-plus"></i>
+                            <i class="fa fa-check"></i> */}
+                        </div>
+
+                        <div class="tag">
+                            <input
+                                type="checkbox"
+                                onClick={() => handleTags('admission')}
+                            />
+                            <label for="">Admission</label>
+                            {/* <i class="fa fa-plus"></i>
+                            <i class="fa fa-check"></i> */}
+                        </div>
+
+                        {/* <div class="tag">
+                            <input type="checkbox" />
+                            <label for="">Seafood</label>
+                            <i class="fa fa-plus"></i>
+                            <i class="fa fa-check"></i> 
+                        </div> */}
                     </div>
                     <div className="modal__buttons">
                         <button
