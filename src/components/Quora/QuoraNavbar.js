@@ -29,6 +29,7 @@ function QuoraNavbar() {
     const [inputUrl, setInputUrl] = useState('');
     const [imageSelected, setImageSelected] = useState('');
     const [tags, setTags] = useState([]);
+    const [university, setUniversity] = useState('');
 
     const questionName = input;
     const handleQuestion = e => {
@@ -60,6 +61,7 @@ function QuoraNavbar() {
                             upVote: 0,
                             downVote: 0,
                             tags: tags,
+                            univComp: university,
                         });
                     }
                 });
@@ -73,6 +75,7 @@ function QuoraNavbar() {
                     upVote: 0,
                     downVote: 0,
                     tags: tags,
+                    univComp: university,
                 });
             }
         }
@@ -103,6 +106,7 @@ function QuoraNavbar() {
         setInputUrl('');
         setImageSelected('');
         setTags([]);
+        setUniversity('');
     };
 
     const handleTags = tag => {
@@ -231,7 +235,13 @@ function QuoraNavbar() {
                         </div>
                     </div>
                     <div className="university">
-                        <input type="text" />
+                        <Input
+                            required
+                            value={university}
+                            onChange={e => setUniversity(e.target.value)}
+                            type="text"
+                            placeholder="Please Enter your current University or Company"
+                        />
                     </div>
                     <div class="tag-wrapper">
                         <p>click the tags</p>
