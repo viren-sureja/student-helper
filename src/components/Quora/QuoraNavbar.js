@@ -1,5 +1,5 @@
 import { Avatar, Button, Input } from '@material-ui/core';
-import { ExpandMore, Link, TramOutlined } from '@material-ui/icons';
+import { ExpandMore, Link } from '@material-ui/icons';
 // import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
 // import FeaturedPlayListOutlinedIcon from '@material-ui/icons/FeaturedPlayListOutlined';
 import HomeIcon from '@material-ui/icons/Home';
@@ -33,6 +33,7 @@ function QuoraNavbar() {
 
     const questionName = input;
     const handleQuestion = e => {
+        console.log(tags);
         e.preventDefault();
         setOpenModal(false);
 
@@ -105,7 +106,7 @@ function QuoraNavbar() {
         setInput('');
         setInputUrl('');
         setImageSelected('');
-        setTags([]);
+        setTags(['all']);
         setUniversity('');
     };
 
@@ -121,12 +122,10 @@ function QuoraNavbar() {
             }
         }
 
-        if (flag) {
-            arr.push(tag);
-        }
+        if (flag) arr.push(tag);
 
         setTags(arr);
-        console.log(arr);
+        // console.log(arr);
     };
 
     return (

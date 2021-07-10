@@ -1,50 +1,63 @@
-import AddIcon from '@material-ui/icons/Add';
+// import AddIcon from '@material-ui/icons/Add';
 import React from 'react';
 import '../../css/Quora/SideBarOptions.css';
 
 const topics = [
     {
-        category: 'Placement',
+        category: 'all',
+        // imgSrc: 'https://qphs.fs.quoracdn.net/main-thumb-t-930-100-cbbsbwijdhpyzlpipejvqpiijhhoaday.jpeg',
+        // imgSrc: '',
+        imgSrc: 'https://i.ytimg.com/vi/nvZCtQAEBoE/maxresdefault.jpg',
+    },
+    {
+        category: 'placement',
         // imgSrc: 'https://qphs.fs.quoracdn.net/main-thumb-t-930-100-cbbsbwijdhpyzlpipejvqpiijhhoaday.jpeg',
         // imgSrc: '',
         imgSrc: 'https://teresas.ac.in/wp-content/uploads/2018/04/placement-services.png',
     },
     {
-        category: 'Academics',
+        category: 'academics',
         // imgSrc: 'https://qphs.fs.quoracdn.net/main-thumb-t-996-100-bfZBQjeEenKKl8fcNY4tVv0FyArtB0Mb.jpeg',
         imgSrc: 'https://thumbs.dreamstime.com/b/academic-academic-apprentice-college-degree-education-educational-institution-establishment-111559495.jpg',
     },
     {
-        category: 'Admission',
+        category: 'admission',
         // imgSrc: 'https://qphs.fs.quoracdn.net/main-thumb-t-2177-100-JiR07D1TQSfeQzRvWXomVaY4Poj2f8Yb.jpeg',
         imgSrc: 'https://cache.careers360.mobi/media/presets/900X562/article_images/2021/6/3/admissioncounselling.jpeg',
     },
     {
-        category: 'General Info',
+        category: 'generalInfo',
         // imgSrc: 'https://qphs.fs.quoracdn.net/main-thumb-t-843-100-W7FzODceTO2aQmp8D7E4rKZ8YgSv21eR.jpeg',
         imgSrc: 'https://www.ttsystem.com/sites/default/files/styles/full_image/public/info_contact.png?itok=O4Wy6NdX',
     },
     {
-        category: 'Fest',
+        category: 'fest',
         // imgSrc: 'https://qphs.fs.quoracdn.net/main-thumb-t-931-100-c8WCPwZ9qPsh5zLGQ5wHh1ddxtc9Cch7.jpeg',
         imgSrc: 'https://whataftercollege.com/wp-content/uploads/2019/03/cover-image-1-1024x535.jpg',
     },
 ];
 
-function SideBarOptions() {
+function SideBarOptions({ handleTag }) {
     return (
         <div className="sidebarOptions">
             {topics.map(topic => (
-                <div key={topic.category} className="sidebarOption">
+                <div
+                    key={topic.category}
+                    className="sidebarOption"
+                    onClick={() => handleTag(topic.category)}
+                >
                     <img src={topic.imgSrc} alt="" />
-                    <p>{topic.category}</p>
+                    <p>
+                        {topic.category[0].toUpperCase() +
+                            topic.category.slice(1)}
+                    </p>
                 </div>
             ))}
 
-            <div className="sidebarOption">
+            {/* <div className="sidebarOption">
                 <AddIcon />
                 <p className="text">Discover Spaces</p>
-            </div>
+            </div> */}
         </div>
     );
 }
