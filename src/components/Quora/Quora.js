@@ -6,17 +6,23 @@ import Sidebar from './Sidebar';
 
 function Quora() {
     const [tag, setTag] = useState('all');
+    const [university, setUniversity] = useState('');
 
     const handleTag = currTag => {
         setTag(currTag);
     };
 
+    const handleUniversity = univ => {
+        console.log(univ);
+        setUniversity(univ);
+    };
+
     return (
         <div className="quora">
-            <QuoraNavbar />
+            <QuoraNavbar handleUniversity={handleUniversity} />
             <div className="quora__content">
                 <Sidebar handleTag={handleTag} />
-                <Feed tag={tag} />
+                <Feed tag={tag} university={university} />
                 {/* <Widget /> */}
             </div>
         </div>

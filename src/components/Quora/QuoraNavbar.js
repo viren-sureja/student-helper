@@ -22,14 +22,21 @@ require('dotenv').config();
 
 Modal.setAppElement('#root');
 
-function QuoraNavbar() {
+function QuoraNavbar({ handleUniversity }) {
     const user = useSelector(selectUser);
     const [openModal, setOpenModal] = useState(false);
     const [input, setInput] = useState('');
     const [inputUrl, setInputUrl] = useState('');
     const [imageSelected, setImageSelected] = useState('');
     const [tags, setTags] = useState([]);
-    const [university, setUniversity] = useState('');
+    const [inputUniv, setInputUniv] = useState('');
+
+    const handleKeyDown = event => {
+        if (event.key === 'Enter') {
+            handleUniversity(event.target.value);
+            event.target.value = '';
+        }
+    };
 
     const questionName = input;
     const handleQuestion = e => {
@@ -38,13 +45,9 @@ function QuoraNavbar() {
         setOpenModal(false);
 
         if (inputUrl === '' && imageSelected !== '') {
-            // console.log(imageSelected, inputUrl);
-
             const formData = new FormData();
             formData.append('file', imageSelected);
             formData.append('upload_preset', 'without_signed');
-
-            // console.log(formData);
 
             axios
                 .post(
@@ -62,7 +65,7 @@ function QuoraNavbar() {
                             upVote: 0,
                             downVote: 0,
                             tags: tags,
-                            univComp: university,
+                            univComp: inputUniv,
                         });
                     }
                 });
@@ -76,7 +79,7 @@ function QuoraNavbar() {
                     upVote: 0,
                     downVote: 0,
                     tags: tags,
-                    univComp: university,
+                    univComp: inputUniv,
                 });
             }
         }
@@ -107,7 +110,7 @@ function QuoraNavbar() {
         setInputUrl('');
         setImageSelected('');
         setTags(['all']);
-        setUniversity('');
+        setInputUniv('');
     };
 
     const handleTags = tag => {
@@ -153,6 +156,14 @@ function QuoraNavbar() {
             <div className="qHeader__input">
                 <SearchIcon />
                 <input type="text" placeholder="Search Quora" />
+            </div>
+            <div className="qHeader__input">
+                <SearchIcon />
+                <input
+                    type="text"
+                    placeholder="Search question"
+                    onKeyDown={handleKeyDown}
+                />
             </div>
             <div className="qHeader__Rem">
                 <div className="qHeader__avatar">
@@ -236,8 +247,8 @@ function QuoraNavbar() {
                     <div className="university">
                         <Input
                             required
-                            value={university}
-                            onChange={e => setUniversity(e.target.value)}
+                            value={inputUniv}
+                            onChange={e => setInputUniv(e.target.value)}
                             type="text"
                             placeholder="Please Enter your current University or Company"
                         />

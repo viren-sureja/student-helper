@@ -3,7 +3,7 @@ import '../../css/Quora/Feed.css';
 import db from '../../firebase';
 import Post from './Post';
 
-function Feed({ tag }) {
+function Feed({ tag, university }) {
     const [posts, setPosts] = useState([]);
     const [dummyPosts, setDummyPosts] = useState([]);
 
@@ -19,15 +19,23 @@ function Feed({ tag }) {
         return false;
     };
 
+    const checkUniv = univ => {
+        return univ === university;
+    };
+
     const checkArray = newPosts => {
         // console.log('current tag is:', tag);
         let updatedPost = [];
         // eslint-disable-next-line array-callback-return
         newPosts.map(post => {
-            if (checkTag(post.questions.tags)) {
+            if (
+                checkTag(post.questions.tags) &&
+                (university === '' || checkUniv(post.questions.univComp))
+            ) {
                 updatedPost.push(post);
             }
         });
+        console.log(updatedPost);
         return updatedPost;
     };
 
@@ -44,7 +52,7 @@ function Feed({ tag }) {
             );
         setDummyPosts(checkArray(posts));
         // setPosts(checkArray(posts));
-    }, [tag]);
+    }, [tag, university]);
 
     return (
         <div className="feed">
