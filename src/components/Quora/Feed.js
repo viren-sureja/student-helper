@@ -40,6 +40,7 @@ function Feed({ tag, university }) {
     };
 
     useEffect(() => {
+        console.log(tag);
         db.collection('questions')
             .orderBy('timestamp', 'desc')
             .onSnapshot(snapshot =>
@@ -50,6 +51,7 @@ function Feed({ tag, university }) {
                     }))
                 )
             );
+        console.log(posts);
         setDummyPosts(checkArray(posts));
         // setPosts(checkArray(posts));
     }, [tag, university]);
