@@ -93,7 +93,7 @@ function QuoraNavbar({ handleUniversity }) {
             zIndex: '1000',
         },
         content: {
-            height: '80%',
+            height: '65%',
             width: '50%',
             top: '50%',
             left: '50%',
@@ -161,7 +161,7 @@ function QuoraNavbar({ handleUniversity }) {
                 <SearchIcon />
                 <input
                     type="text"
-                    placeholder="Search question"
+                    placeholder="Search by University"
                     onKeyDown={handleKeyDown}
                 />
             </div>

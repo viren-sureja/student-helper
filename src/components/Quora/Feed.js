@@ -3,7 +3,8 @@ import '../../css/Quora/Feed.css';
 import db from '../../firebase';
 import Post from './Post';
 
-function Feed({ tag, university }) {
+function Feed({ tag, university, handleTag }) {
+    // let tempTag = tag;
     const [posts, setPosts] = useState([]);
     const [dummyPosts, setDummyPosts] = useState([]);
 
@@ -24,12 +25,12 @@ function Feed({ tag, university }) {
     };
 
     const checkArray = newPosts => {
-        // console.log('current tag is:', tag);
+        console.log('current tag is:', typeof tag);
         let updatedPost = [];
         // eslint-disable-next-line array-callback-return
         newPosts.map(post => {
             if (
-                checkTag(post.questions.tags) &&
+                (tag === '' || checkTag(post.questions.tags)) &&
                 (university === '' || checkUniv(post.questions.univComp))
             ) {
                 updatedPost.push(post);
@@ -40,20 +41,25 @@ function Feed({ tag, university }) {
     };
 
     useEffect(() => {
-        console.log(tag);
+        console.log(typeof tag, tag, tag === '');
         db.collection('questions')
             .orderBy('timestamp', 'desc')
-            .onSnapshot(snapshot =>
+            .onSnapshot(snapshot => {
+                // console.log(snapshot);
                 setPosts(
                     snapshot.docs.map(doc => ({
                         id: doc.id,
                         questions: doc.data(),
                     }))
-                )
-            );
+                );
+            });
         console.log(posts);
-        setDummyPosts(checkArray(posts));
-        // setPosts(checkArray(posts));
+        if (tag !== '') {
+            setDummyPosts(checkArray(posts));
+            console.log('hello');
+        } else setDummyPosts(posts);
+
+        console.log(dummyPosts);
     }, [tag, university]);
 
     return (
