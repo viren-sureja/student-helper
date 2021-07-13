@@ -2,7 +2,7 @@ import history from "../history";
 import axios from "../axios";
 
 export const getCollection =
-  (setFilteredCollection) => async (dispatch, getState) => {
+  (setFilteredCollection, setAllBook) => async (dispatch, getState) => {
     try {
       const token = localStorage.getItem("user");
       const response = await axios.get("/books/collection", {
@@ -11,6 +11,7 @@ export const getCollection =
         },
       });
       console.log(response.data);
+      setAllBook(response.data);
       setFilteredCollection(response.data);
       dispatch({ type: "getCollection", payload: response.data });
     } catch (e) {

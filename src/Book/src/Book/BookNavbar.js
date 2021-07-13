@@ -10,7 +10,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
-import history from "./history";
+import history from "../history";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",

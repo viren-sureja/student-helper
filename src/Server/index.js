@@ -62,7 +62,11 @@ io.on("connection", (socket) => {
     //console.log(receiverId)
     const user = getUser(receiverId);
     //console.log("this is user",users)
-    if(user && user.length === 0) return
+    if(!user) {
+      console.log("samne wala online nahi hai")
+      return
+    }
+    console.log("this is reciever",users)
     io.to(user.socketId).emit("getMessage", {
       senderId,
       text,
@@ -73,5 +77,12 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("a user disconnected!");
     removeUser(socket.id);
+    console.log(users)
   });
+  // socket.on("mannual disconnect", (userId) => {
+  //   const user = getUser(userId);
+  //   console.log("user to be removed",user)
+  //   console.log("a user disconnected!");
+  //   removeUser(user.socketId);
+  // });
 });

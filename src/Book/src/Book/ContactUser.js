@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Navbar from "./Navbar";
+import Navbar from "../Home/HomeComponents/Navbar";
 import ChatForm from "./ChatForm";
-import axios from "./axios";
+import axios from "../axios";
 import { io } from "socket.io-client";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import CustomizedSnackbars from "./CustomizedSnackbars";
+import CustomizedSnackbars from "../CustomizedSnackbars";
 
 const ContactUser = (props) => {
   const [id, setId] = useState(props.location.state.ownerId);
@@ -28,6 +28,10 @@ const ContactUser = (props) => {
 
   useEffect(() => {
     setId(id);
+    return function cleanup() {
+      console.log("routes has chnages now its time for disconnection");
+      socket.current.disconnect();
+    };
   }, []);
 
   useEffect(() => {

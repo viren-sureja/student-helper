@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();  
 
 const {auth} = require("../middleware/auth.js")
-const { addBook, myCollection, collection } = require("../controllers/Book.js");
+const { addBook, collection, addToWishList, removeFromWishList, getWishList, userCollection } = require("../controllers/Book.js");
 const { addRequest, getMySentRequest, getMyReceivedRequest, deleteRequest, confirmRequest } = require("../controllers/Request.js");
 const { getTrade } = require("../controllers/Trade.js");
 const { getMessage, addMessage } = require("../controllers/Message.js");
@@ -13,7 +13,7 @@ router.get("/test", auth , (req,res) => {
 })
 
 router.post("/addBook",auth,addBook)
-router.get("/myCollection",auth,myCollection)
+router.get("/userCollection",auth,userCollection)
 router.get("/collection",auth,collection)
 
 //routes for requests
@@ -29,6 +29,11 @@ router.get("/getTrade",auth,getTrade)
 //routes for messages
 router.post("/addMessage",auth,addMessage);
 router.get("/getMessage",auth,getMessage);
+
+//routes for wishlist
+router.post("/addToWishList",auth,addToWishList);
+router.post("/removeFromWishList",auth,removeFromWishList);
+router.get("/getWishList",auth,getWishList)
 
 
 module.exports = router;

@@ -3,7 +3,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Navbar from "./Navbar";
+
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -11,9 +11,9 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
-import { getTrade } from "./actions/getTradeAction";
-import BookNavbar from "./BookNavbar";
-import BookCard from "./BookCard.js";
+import { getTrade } from "../../actions/getTradeAction";
+import BookNavbar from "../BookNavbar";
+import BookCard from "../Card/BookCard.js";
 const useStyles = makeStyles((theme) => ({
   addBook: {
     display: "flex",

@@ -5,6 +5,7 @@ import getTradeReducer from "./getTradeReducer";
 import loginReducer from "./loginReducer";
 import sentRequestReducer from "./sentRequestReducer";
 import receivedRequestReducer from "./receivedRequestReducer";
+import wishListReducer from "./wishListReducer";
 
 export default combineReducers({
   addBook: addBookReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   trades: getTradeReducer,
   sentRequest: sentRequestReducer,
   receivedRequest: receivedRequestReducer,
+  wishList: wishListReducer,
 });

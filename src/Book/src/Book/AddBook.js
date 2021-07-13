@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import axios from "./axios";
+import axios from "../axios";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Navbar from "./Navbar";
+import BookNavbar from "./BookNavbar";
 import { useFormik } from "formik";
-import { addBook } from "./actions/addBookAction";
+import { addBook } from "../actions/addBookAction";
 import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -79,7 +79,7 @@ const AddBook = (props) => {
   });
   return (
     <div>
-      <Navbar />
+      <BookNavbar />
 
       <form action="" method="POST" onSubmit={formik.handleSubmit} noValidate>
         <div style={{ margin: "25px" }}>

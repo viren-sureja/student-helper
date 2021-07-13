@@ -1,12 +1,11 @@
 import React from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import BookNavbar from "./BookNavbar";
+import BookNavbar from "../BookNavbar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import MySent from "./MySent";
 import MyReceived from "./MyReceived";
 import Grid from "@material-ui/core/Grid";
-
 import SendIcon from "@material-ui/icons/Send";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import CallReceivedIcon from "@material-ui/icons/CallReceived";

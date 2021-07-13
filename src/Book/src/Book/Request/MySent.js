@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
-import BookCard from "./BookCard";
+import BookCard from "../Card/BookCard";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Navbar from "./Navbar";
-import { deleteRequest, mySent } from "./actions/requestAction";
+
+import { deleteRequest, mySent } from "../../actions/requestAction";
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
-import BookNavbar from "./BookNavbar";
+import BookNavbar from "../BookNavbar";
 const useStyles = makeStyles((theme) => ({}));
 
 const MySent = (props) => {
@@ -26,7 +26,10 @@ const MySent = (props) => {
       <Card variant="outlined">
         <CardContent>
           <Typography variant="h5" gutterBottom>
-            Book - {book}
+            Book_id - {book._id}
+          </Typography>
+          <Typography variant="h5" gutterBottom>
+            Book_title - {book.title}
           </Typography>
           <Typography variant="h5" gutterBottom>
             From - {from}

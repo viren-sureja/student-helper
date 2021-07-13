@@ -56,6 +56,11 @@ module.exports.getMySentRequest = async (req,res) => {
 
   const sentrequests = await Request.find({from:req.user._id})
 
+  for(var i=0;i<sentrequests.length;++i){
+    const book = await Book.findOne({_id : sentrequests[i].book})
+    sentrequests[i].book = book
+  }
+  console.log(sentrequests)
   res.send(sentrequests)
 
 }
@@ -64,9 +69,14 @@ module.exports.getMyReceivedRequest = async (req,res) => {
 
   //res.send("getMyReceivedRequest accessed")
 
-  const sentrequests = await Request.find({to:req.user._id})
+  var receivedtrequests = await Request.find({to:req.user._id})
 
-  res.send(sentrequests)
+  for(var i=0;i<receivedrequests.length;++i){
+    const book = await Book.findOne({_id : receivedrequests[i].book})
+    receivedrequests[i].book = book
+  }
+  console.log(receivedrequests)
+  res.send(receivedrequests)
 
 }
 

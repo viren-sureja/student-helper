@@ -1,6 +1,6 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import BookCard from "./BookCard";
+import BookCard from "./Card/BookCard";
 
 import Typography from "@material-ui/core/Typography";
 const Book = () => {

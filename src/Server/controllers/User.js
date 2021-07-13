@@ -73,3 +73,7 @@ module.exports.userLogin = async (req,res) => {
     res.header('auth-token',token).send({token: token, user : user._id})
     
 }
+
+module.exports.checkLogin = async(req,res) => {
+    res.send("succesfully logged in")
+}

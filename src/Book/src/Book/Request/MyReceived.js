@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
-import BookCard from "./BookCard";
+import BookCard from "../Card/BookCard";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { connect } from "react-redux";
 import {
   myReceived,
   confirmRequest,
   deleteRequest,
-} from "./actions/requestAction";
+} from "../../actions/requestAction";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Navbar from "./Navbar";
-import BookNavbar from "./BookNavbar";
+import BookNavbar from "../BookNavbar";
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";

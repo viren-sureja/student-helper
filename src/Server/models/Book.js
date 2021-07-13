@@ -31,9 +31,14 @@ const BookSchema = mongoose.Schema({
   createdAt : {
     type: Date,
     default : Date.now()
-  }
+  },
   //whisillised by nu aaray
-  
+  wishListedBy: [
+    {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+    },
+  ],
 })
 
 const Book = mongoose.model('Book',BookSchema)
