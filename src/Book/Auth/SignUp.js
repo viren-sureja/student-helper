@@ -3,7 +3,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Navbar from "../Home/HomeComponents/Navbar";
 import { useFormik } from "formik";
-import { login, signUp } from "../actions/loginAction";
+import { login, signUp } from "../actions/authAction";
 import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";

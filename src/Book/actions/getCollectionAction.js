@@ -21,7 +21,7 @@ export const getCollection =
         e.response.data === "Invalid Token" ||
         e.response.data === "Access denied"
       ) {
-        history.push("/");
+        // history.push("/");
       }
     }
   };

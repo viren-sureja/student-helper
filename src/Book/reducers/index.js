@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import addBookReducer from "./addBookReducer";
 import getCollectionReducer from "./getCollectionReducer";
 import getTradeReducer from "./getTradeReducer";
-import loginReducer from "./loginReducer";
+import loginReducer from "./authReducer";
 import sentRequestReducer from "./sentRequestReducer";
 import receivedRequestReducer from "./receivedRequestReducer";
 import wishListReducer from "./wishListReducer";
