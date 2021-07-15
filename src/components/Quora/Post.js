@@ -23,7 +23,7 @@ const customStyle = {
         zIndex: '1000',
     },
     content: {
-        height: '60%',
+        height: '45%',
         width: '40%',
         top: '50%',
         left: '50%',

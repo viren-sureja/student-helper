@@ -136,7 +136,7 @@
 }
 
 .modal__question > h1 {
-    color: #8f1f1b;
+    color: #354a77;
     font-weight: 600;
     margin-bottom: 10px;
 }
@@ -162,7 +162,7 @@
     height: 200px;
     padding: 5px;
     font-size: 15px;
-    color: blue;
+    color: #354a77;
 }
 
 .modal__button {
@@ -177,7 +177,8 @@
     border: none;
     margin-top: 5px;
     outline: none;
-    color: gray;
+    background-color: #fca311;
+    color: #14213d;
     font-weight: 500;
     padding: 10px;
     margin-right: 10px;
@@ -188,8 +189,8 @@
     border: none;
     outline: none;
     margin-top: 5px;
-    background-color: rgb(0, 64, 255);
-    color: white;
+    background-color: #14213d;
+    color: #fca311;
     font-weight: 700;
     padding: 10px;
     margin-right: 10px;

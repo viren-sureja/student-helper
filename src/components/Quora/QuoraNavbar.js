@@ -140,12 +140,6 @@ function QuoraNavbar({ handleUniversity }) {
                 <div className="qHeader__icon">
                     <HomeIcon />
                 </div>
-                {/* <div className="qHeader__icon">
-                    <FeaturedPlayListOutlinedIcon />
-                </div> */}
-                {/* <div className="qHeader__icon">
-                    <AssignmentTurnedInOutlinedIcon />
-                </div> */}
                 <div className="qHeader__icon">
                     <PeopleAltOutlinedIcon />
                 </div>
@@ -189,8 +183,6 @@ function QuoraNavbar({ handleUniversity }) {
                 >
                     <div className="modal__title">
                         <h5>Add Question</h5>
-                        <h5>Share Link</h5>
-                        <h5>Upload Image</h5>
                     </div>
                     <div className="modal__info">
                         <Avatar
@@ -202,36 +194,46 @@ function QuoraNavbar({ handleUniversity }) {
                             }
                         />
                         <p>
-                            {user.displayName ? user.displayName : user.email}{' '}
-                            is asking in
+                            Question is being asked by
+                            <span>
+                                {user.displayName
+                                    ? user.displayName
+                                    : user.email}
+                            </span>
                         </p>
-                        <div className="modal__scope">
-                            <PeopleAltOutlinedIcon />
-                            <p>Public</p>
-                            <ExpandMore />
-                        </div>
                     </div>
                     <div className="modal__Field">
-                        <Input
-                            required
-                            value={input}
-                            onChange={e => setInput(e.target.value)}
-                            type="text"
-                            placeholder="Start your question with 'What', 'How', 'Why', etc. "
-                        />
-                        <div className="modal__fieldLink">
-                            <Link />
+                        <div className="modal__fieldQuestion modal__field__component">
+                            <span>Question</span>
+                            <input
+                                required
+                                value={input}
+                                onChange={e => setInput(e.target.value)}
+                                type="text"
+                                placeholder="Start your question with 'What', 'How', 'Why', etc. "
+                            />
+                        </div>
+                        <div className="modal__fieldLink modal__field__component">
+                            <span>Link</span>
                             <input
                                 value={inputUrl}
                                 onChange={e => setInputUrl(e.target.value)}
                                 type="text"
                                 placeholder="Optional: inclue a link that gives context"
-                            ></input>
+                            />
                         </div>
-                        <div className="modal__imageUpload">
-                            <label className="upload image">
-                                Upload Image:
-                            </label>
+                        <div className="modal__fieldUniversity modal__field__component">
+                            <span>University</span>
+                            <input
+                                required
+                                value={inputUniv}
+                                onChange={e => setInputUniv(e.target.value)}
+                                type="text"
+                                placeholder="Please Enter your current University or Company"
+                            />
+                        </div>
+                        <div className="modal__fieldImageUpload modal__field__component">
+                            <span>Upload Image</span>
                             <input
                                 type="file"
                                 id="img"
@@ -244,25 +246,15 @@ function QuoraNavbar({ handleUniversity }) {
                             />
                         </div>
                     </div>
-                    <div className="university">
-                        <Input
-                            required
-                            value={inputUniv}
-                            onChange={e => setInputUniv(e.target.value)}
-                            type="text"
-                            placeholder="Please Enter your current University or Company"
-                        />
-                    </div>
+                    {/* <div className="university"></div> */}
                     <div class="tag-wrapper">
-                        <p>click the tags</p>
+                        <p>Select appropriate tags</p>
                         <div class="tag">
                             <input
                                 type="checkbox"
                                 onClick={() => handleTags('placement')}
                             />
                             <label for="">Placement</label>
-                            {/* <i class="fa fa-plus"></i>
-                            <i class="fa fa-check"></i> */}
                         </div>
 
                         <div class="tag">
@@ -271,8 +263,6 @@ function QuoraNavbar({ handleUniversity }) {
                                 onClick={() => handleTags('academics')}
                             />
                             <label for="">Academics</label>
-                            {/* <i class="fa fa-plus"></i>
-                            <i class="fa fa-check"></i> */}
                         </div>
 
                         <div class="tag">
@@ -281,8 +271,6 @@ function QuoraNavbar({ handleUniversity }) {
                                 onClick={() => handleTags('fest')}
                             />
                             <label for="">Fest</label>
-                            {/* <i class="fa fa-plus"></i>
-                            <i class="fa fa-check"></i> */}
                         </div>
 
                         <div class="tag">
@@ -291,8 +279,6 @@ function QuoraNavbar({ handleUniversity }) {
                                 onClick={() => handleTags('generalInfo')}
                             />
                             <label for="">General info</label>
-                            {/* <i class="fa fa-plus"></i>
-                            <i class="fa fa-check"></i> */}
                         </div>
 
                         <div class="tag">
@@ -301,16 +287,7 @@ function QuoraNavbar({ handleUniversity }) {
                                 onClick={() => handleTags('admission')}
                             />
                             <label for="">Admission</label>
-                            {/* <i class="fa fa-plus"></i>
-                            <i class="fa fa-check"></i> */}
                         </div>
-
-                        {/* <div class="tag">
-                            <input type="checkbox" />
-                            <label for="">Seafood</label>
-                            <i class="fa fa-plus"></i>
-                            <i class="fa fa-check"></i> 
-                        </div> */}
                     </div>
                     <div className="modal__buttons">
                         <button
