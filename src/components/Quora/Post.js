@@ -186,6 +186,7 @@ function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
                         alt="QuestionImage was not added while posting the question"
                     />
                 )}
+                <div className="border__bottom"></div>
                 <div className="post__answer">
                     <button
                         onClick={() => setIsModalOpen(true)}
@@ -195,7 +196,7 @@ function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
                     </button>
 
                     {getAnswers.map(({ id, answers }) => (
-                        <span key={id} className="border__bottom">
+                        <span key={id}>
                             <p
                                 key={id}
                                 style={{
@@ -239,11 +240,11 @@ function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
                 <div className="post__footerAction">
                     <button className="upwardArrow" onClick={handleUpVote}>
                         <ArrowUpwardOutlinedIcon />
-                        {upvote}
+                        <span>{upvote}</span>
                     </button>
                     <button className="downwardArrow" onClick={handleDownVote}>
                         <ArrowDownwardOutlinedIcon />
-                        {downvote}
+                        <span>{downvote}</span>
                     </button>
                 </div>
 

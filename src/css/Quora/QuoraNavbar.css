@@ -27,13 +27,13 @@
     font-size: xx-large;
     background-color: white;
     padding: 5px 20px;
-    color: gray;
+    color: #14213d;
 }
 
 .qHeader__icon > .MuiSvgIcon-root:hover {
-    background-color: rgba(233, 233, 233, 0.5);
+    background-color: #14213d;
     border-radius: 10px;
-    color: #b92b27;
+    color: #fca311;
     /* font-size: xx-large; 
     animation-name: iconResize;
     animation-duration: 0.3s; */
@@ -93,7 +93,7 @@
 
 .qHeader__Rem > .MuiButton-root {
     color: white;
-    background: #b92b27;
+    background: #263658;
     text-transform: inherit;
     border-radius: 20px;
     margin-left: 25px;
@@ -101,7 +101,7 @@
 
 .qHeader__Rem > .MuiButton-root:hover {
     color: #ffffff;
-    background: #8f1f1b;
+    background: #6174a0;
 }
 
 /* modal styling */

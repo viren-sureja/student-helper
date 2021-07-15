@@ -1,6 +1,8 @@
 .sidebarOptions {
     display: flex;
     flex-direction: column;
+    background-color: #dad8d8;
+    border-radius: 5px;
 }
 
 .sidebarOption {
@@ -11,8 +13,10 @@
 }
 
 .sidebarOption:hover {
-    background: rgb(211, 211, 211);
+    /* background: rgb(211, 211, 211); */
+    background: #f5c476;
     border-radius: 5px;
+    color: white;
 }
 
 .sidebarOption > img {
@@ -28,10 +32,13 @@
 
 .sidebarOption > p {
     margin-left: 10px;
-    color: gray;
-    font-weight: 400;
-    font-size: 13px;
+    color: black;
+    font-weight: 600;
+    font-size: 15px;
 }
+/* .sidebarOption > p:hover {
+    color: white;
+} */
 
 .sidebarOption > .text {
     margin-left: 23px;
