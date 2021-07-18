@@ -11,6 +11,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
 import history from "../history";
+import { connect } from "react-redux";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {},
 }));
 
-const BookNavbar = () => {
+const BookNavbar = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
@@ -176,15 +177,27 @@ const BookNavbar = () => {
                     >
                       <Typography variant="subtitle1">Sign Up</Typography>
                     </Button>
-                    <Button
-                      variant="outlined"
-                      style={{ marginTop: "18px", color: "green" }}
-                      onClick={() => {
-                        history.push("/login");
-                      }}
-                    >
-                      <Typography variant="subtitle1">Login</Typography>
-                    </Button>
+                    {props.isSignedIn ? (
+                      <Button
+                        variant="outlined"
+                        style={{ marginTop: "18px", color: "green" }}
+                        onClick={() => {
+                          // history.push("/login");
+                        }}
+                      >
+                        <Typography variant="subtitle1">Logout</Typography>
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="outlined"
+                        style={{ marginTop: "18px", color: "green" }}
+                        onClick={() => {
+                          history.push("/login");
+                        }}
+                      >
+                        <Typography variant="subtitle1">Login</Typography>
+                      </Button>
+                    )}
                   </div>
                 </Drawer>
               </div>
@@ -233,4 +246,9 @@ const BookNavbar = () => {
   );
 };
 
-export default BookNavbar;
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.login.isSignedIn,
+  };
+};
+export default connect(mapStateToProps, null)(BookNavbar);
