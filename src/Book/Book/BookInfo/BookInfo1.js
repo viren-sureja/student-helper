@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import BookNavbar from "./Book/BookNavbar";
+import BookNavbar from "../BookNavbar";
 import Button from "@material-ui/core/Button";
-import axios from "./axios";
+import axios from "../../axios";
 import Grid from "@material-ui/core/Grid";
-import history from "./history";
+import history from "../../history";
 import { Link } from "react-router-dom";
 import ContactPhoneIcon from "@material-ui/icons/ContactPhone";
 import SendIcon from "@material-ui/icons/Send";
@@ -15,6 +15,7 @@ import BookIcon from "@material-ui/icons/Book";
 import CreateIcon from "@material-ui/icons/Create";
 import DescriptionIcon from "@material-ui/icons/Description";
 import List from "@material-ui/core/List";
+import BookInfoImage from "./BookInfoImage";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
 import ListItem from "@material-ui/core/ListItem";
@@ -24,7 +25,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { connect } from "react-redux";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { addtoWishList, removeFromWishList } from "./actions/getWishListAction";
+import {
+  addtoWishList,
+  removeFromWishList,
+} from "../../actions/getWishListAction";
 
 const useStyles = makeStyles((theme) => ({
   itemText: {
@@ -62,7 +66,7 @@ const BookInfo1 = (props) => {
     props.addtoWishList(updatedbook);
     setBook(updatedbook);
   };
-
+  console.log("BookOwner", book.owner);
   const removeFromWish = () => {
     console.log("remove from wishlist");
     console.log(book.wishListedBy.filter((id) => id !== currentUserId));
@@ -106,29 +110,21 @@ const BookInfo1 = (props) => {
   return (
     <div>
       <BookNavbar />
-      <div style={{ margin: `${isMobile ? "" : "30px"}` }}>
+      <div
+        style={{
+          marginInline: `${isMobile ? "" : "30px"}`,
+        }}
+      >
         <Grid container justify="center" alignItems="center">
-          <Grid
-            container
-            justify="center"
-            alignItems="center"
-            xs={12}
-            md={10}
-            style={{ backgroundColor: "pink" }}
-          >
-            <Grid item md={4}>
+          <Grid container justify="center" alignItems="center" xs={12} md={10}>
+            <Grid item md={6} style={{ marginTop: "30px" }}>
               <center>
                 <div>
-                  <img
-                    src="./images/Book3.jpg"
-                    width="265"
-                    height="350"
-                    alt="Home"
-                  />
+                  <BookInfoImage imageUrl={book.imageUrl} />
                 </div>
               </center>
             </Grid>
-            <Grid item md={6}>
+            <Grid item md={6} style={{ paddingLeft: "5px", marginTop: "30px" }}>
               <List dense className={classes.list}>
                 <div>
                   <ListItem>
@@ -136,7 +132,7 @@ const BookInfo1 = (props) => {
                       <BookIcon />
                     </ListItemIcon>
                     <ListItemText
-                      primary="Name"
+                      primary="Name Name Name Name Name"
                       secondary={`${book.title}`}
                       className={classes.itemText}
                     />
@@ -246,7 +242,7 @@ const BookInfo1 = (props) => {
                     to={{
                       pathname: "/chat",
                       state: {
-                        ownerId: book.owner,
+                        ownerId: book,
                       },
                     }}
                   >

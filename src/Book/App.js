@@ -11,7 +11,7 @@ import "aos/dist/aos.css";
 import Home from "./Home/Home";
 import Trades from "./Book/Trade/Trades";
 import BookInfo from "./Book/BookInfo";
-import BookInfo1 from "./BookInfo1";
+import BookInfo1 from "./Book/BookInfo/BookInfo1";
 import Request from "./Book/Request/Request";
 import MyCollection from "./Book/Collection/MyCollection";
 import Wishlist from "./Book/Wishlist/Wishlist";
