@@ -57,14 +57,6 @@ const Collection = (props) => {
 
   const classes = useStyles();
 
-  // component={Link}
-  //           to={{
-  //             pathname: "/chat",
-  //             state: {
-  //               ownerId: owner,
-  //             },
-  //           }}
-
   // to={{
   //   pathname: "/bookInfo",
   //   state: {

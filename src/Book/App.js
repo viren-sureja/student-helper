@@ -11,6 +11,7 @@ import "aos/dist/aos.css";
 import Home from "./Home/Home";
 import Trades from "./Book/Trade/Trades";
 import BookInfo from "./Book/BookInfo";
+import BookInfo1 from "./BookInfo1";
 import Request from "./Book/Request/Request";
 import MyCollection from "./Book/Collection/MyCollection";
 import Wishlist from "./Book/Wishlist/Wishlist";
@@ -63,6 +64,7 @@ const App = (props) => {
             }}
           />
           <Route path="/bookInfo" exact component={BookInfo} />
+          <Route path="/bookInfo1" exact component={BookInfo1} />
           {/* <Route path="/mySent" exact component={MySent} /> */}
           {/* <Route path="/myReceived" exact component={MyReceived} /> */}
           <Route

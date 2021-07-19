@@ -290,7 +290,7 @@ const BookCard = (props) => {
                 }}
                 component={Link}
                 to={{
-                  pathname: "/bookInfo",
+                  pathname: "/bookInfo1",
                   state: {
                     book: props.book,
                   },
