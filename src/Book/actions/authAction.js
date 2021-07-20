@@ -1,5 +1,6 @@
 import history from "../history";
 import axios from "../axios";
+import { stubTrue } from "lodash-es";
 
 export const login = (values) => async (dispatch, getState) => {
   try {
@@ -44,8 +45,9 @@ export const verifyLogin = () => async (dispatch, getState) => {
         "auth-token": token,
       },
     });
-    dispatch({ type: "verifyLogin" });
+    dispatch({ type: "verifyLogin", payload: true });
   } catch (e) {
     console.log(e);
+    dispatch({ type: "verifyLogin", payload: false });
   }
 };

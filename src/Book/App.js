@@ -19,15 +19,15 @@ import SignUp from "./Auth/SignUp";
 import { connect } from "react-redux";
 import { verifyLogin } from "./actions/authAction";
 const App = (props) => {
-  useEffect(() => {
+  useEffect(async () => {
     AOS.init({
       duration: 1000,
       offset: 100,
     });
     // console.log("Hi");
-    props.verifyLogin();
+    await props.verifyLogin();
   }, []);
-  console.log(props.isSignedIn);
+  console.log("Hi", props.isSignedIn);
   return (
     <div>
       <Router history={history}>
@@ -37,7 +37,11 @@ const App = (props) => {
             path="/addBook"
             exact
             render={() => {
-              return props.isSignedIn ? <AddBook /> : <Redirect to="/login" />;
+              return props.isSignedIn !== false ? (
+                <AddBook />
+              ) : (
+                <Redirect to="/login" />
+              );
             }}
           />
           <Route path="/login" exact component={Login} />
@@ -49,18 +53,23 @@ const App = (props) => {
             path="/chat"
             exact
             render={() => {
-              return props.isSignedIn ? (
+              return props.isSignedIn !== false ? (
                 <ContactUser />
               ) : (
                 <Redirect to="/login" />
               );
             }}
+            // component={ContactUser}
           />
           <Route
             path="/trades"
             exact
             render={() => {
-              return props.isSignedIn ? <Trades /> : <Redirect to="/login" />;
+              return props.isSignedIn !== false ? (
+                <Trades />
+              ) : (
+                <Redirect to="/login" />
+              );
             }}
           />
           <Route path="/bookInfo" exact component={BookInfo} />
@@ -71,14 +80,18 @@ const App = (props) => {
             path="/request"
             exact
             render={() => {
-              return props.isSignedIn ? <Request /> : <Redirect to="/login" />;
+              return props.isSignedIn !== false ? (
+                <Request />
+              ) : (
+                <Redirect to="/login" />
+              );
             }}
           />
           <Route
             path="/myCollection"
             exact
             render={() => {
-              return props.isSignedIn ? (
+              return props.isSignedIn !== false ? (
                 <MyCollection />
               ) : (
                 <Redirect to="/login" />
@@ -89,7 +102,11 @@ const App = (props) => {
             path="/wishlist"
             exact
             render={() => {
-              return props.isSignedIn ? <Wishlist /> : <Redirect to="/login" />;
+              return props.isSignedIn !== false ? (
+                <Wishlist />
+              ) : (
+                <Redirect to="/login" />
+              );
             }}
           />
         </div>

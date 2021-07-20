@@ -235,16 +235,19 @@ const BookInfo1 = (props) => {
                 </Grid>
                 <Grid item style={{ margin: "10px" }}>
                   <Button
-                    type="submit"
+                    onClick={() => {
+                      localStorage.setItem("owner", book.owner);
+                      history.push("/chat");
+                    }}
                     variant="outlined"
                     startIcon={<ContactPhoneIcon />}
-                    component={Link}
-                    to={{
-                      pathname: "/chat",
-                      state: {
-                        ownerId: book,
-                      },
-                    }}
+
+                    // to={{
+                    //   pathname: "/chat",
+                    //   state: {
+                    //     ownerId: book.owner,
+                    //   },
+                    // }}
                   >
                     Contact Seller
                   </Button>
