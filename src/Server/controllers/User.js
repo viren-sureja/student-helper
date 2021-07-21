@@ -64,9 +64,9 @@ module.exports.userLogin = async (req, res) => {
   const userPresent = await User.findOne({ _id: user._id });
   if (!userPresent) {
     console.log("no present");
-    return res.send("not present");
+    return res.status(400).send("not present");
   }
-  res.header("auth-token", token).send({ token: token, user: user._id });
+  res.header("auth-token", token).send({ token: token, user: user._id, name : user.name });
 };
 
 module.exports.checkLogin = async (req, res) => {

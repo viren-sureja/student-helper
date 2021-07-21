@@ -42,7 +42,7 @@ module.exports.userCollection = async (req, res) => {
   // console.log(allbooks)
   // books of each users
 
-  const mybooks = await Book.find({ owner: req.query._id });
+  const mybooks = await Book.find({ owner: req.query._id,isSold : false });
 
   res.send(mybooks);
 };
@@ -51,7 +51,7 @@ module.exports.collection = async (req, res) => {
   //res.send("mucollection route accessed")
   // console.log(req.user._id)
 
-  mybooks = await Book.find({ owner: { $ne: req.user._id } });
+  mybooks = await Book.find({isSold : false});
 
   res.send(mybooks);
 };

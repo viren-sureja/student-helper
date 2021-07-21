@@ -14,7 +14,7 @@ router.get("/test", auth , (req,res) => {
 
 router.post("/addBook",auth,addBook)
 router.get("/userCollection",auth,userCollection)
-router.get("/collection",auth,collection)
+router.get("/collection",collection)
 router.delete("/deleteBook",auth,deleteBook)
 
 //routes for requests
