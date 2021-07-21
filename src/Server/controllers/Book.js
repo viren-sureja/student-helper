@@ -116,3 +116,8 @@ module.exports.deleteBook = async  (req,res) => {
   }
   res.send("book is deleted")
 }
+
+module.exports.bookInfo = async (req,res) => {
+  const response = await Book.findOne({_id: req.query._id})
+  res.send(response)
+}

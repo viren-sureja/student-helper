@@ -2,10 +2,11 @@ const express = require("express");
 const router = express.Router();  
 
 const {auth} = require("../middleware/auth.js")
-const { addBook, collection, addToWishList, removeFromWishList, getWishList, userCollection, deleteBook } = require("../controllers/Book.js");
+const { addBook, collection, addToWishList, removeFromWishList, getWishList, userCollection, deleteBook, bookInfo } = require("../controllers/Book.js");
 const { addRequest, getMySentRequest, getMyReceivedRequest, deleteRequest, confirmRequest } = require("../controllers/Request.js");
 const { getTrade } = require("../controllers/Trade.js");
 const { getMessage, addMessage } = require("../controllers/Message.js");
+
 
 //roues for books
 router.get("/test", auth , (req,res) => {
@@ -16,6 +17,7 @@ router.post("/addBook",auth,addBook)
 router.get("/userCollection",auth,userCollection)
 router.get("/collection",collection)
 router.delete("/deleteBook",auth,deleteBook)
+router.get("/bookInfo",bookInfo)
 
 //routes for requests
 router.post("/addRequest",auth, addRequest)

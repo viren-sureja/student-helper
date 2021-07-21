@@ -72,3 +72,9 @@ module.exports.userLogin = async (req, res) => {
 module.exports.checkLogin = async (req, res) => {
   res.send("succesfully logged in");
 };
+
+module.exports.userInfo = async (req,res) => {
+  var response = await User.findById(req.query._id)
+  response.password = undefined
+  res.send(response)
+}

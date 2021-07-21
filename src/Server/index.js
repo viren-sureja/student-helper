@@ -2,6 +2,7 @@ const express = require('express')
 const connectDB = require('./config/db.js')
 const dotenv = require("dotenv")
 const cors = require("cors")
+const { response } = require('express')
 
 
 dotenv.config()
@@ -19,6 +20,9 @@ app.use(express.json({ limit: "30mb" , extended: true}));
 app.use("/books/", require("./routes/Book.js"));
 app.use("/users/", require("./routes/User.js"));
 
+app.get("/",(req,res) => {
+  res.send("backend is accesible")
+})
 
 var server = app.listen(PORT, () =>
   console.log(
