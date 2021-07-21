@@ -10,7 +10,9 @@ import MuiAlert from "@material-ui/lab/Alert";
 import CustomizedSnackbars from "../CustomizedSnackbars";
 
 const ContactUser = (props) => {
-  const [id, setId] = useState(props.location.state.ownerId);
+  var owner = localStorage.getItem("owner");
+  // localStorage.removeItem("owner");
+  const [id, setId] = useState(owner);
   const [messages, SetMessages] = useState([]);
   const scrollRef = useRef();
   const socket = useRef();
@@ -98,7 +100,7 @@ const ContactUser = (props) => {
     const token = localStorage.getItem("user");
     const response = await axios.post(
       "/books/addMessage",
-      { receiver: props.location.state.ownerId, content: content },
+      { receiver: owner, content: content },
       {
         headers: {
           "Content-Type": "application/json",
@@ -136,9 +138,7 @@ const ContactUser = (props) => {
     <div>
       <Navbar />
       <div style={{ margin: "30px" }}>
-        <Typography variant="subtitle1">
-          OwnerId - {props.location.state.ownerId}
-        </Typography>
+        <Typography variant="subtitle1">OwnerId - {owner}</Typography>
         <>
           <h1>all messages</h1>
         </>

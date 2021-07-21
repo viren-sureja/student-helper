@@ -51,7 +51,11 @@ module.exports.collection = async (req, res) => {
   //res.send("mucollection route accessed")
   // console.log(req.user._id)
 
+<<<<<<< HEAD
   mybooks = await Book.find({isSold : false});
+=======
+  mybooks = await Book.find();
+>>>>>>> 84b16c26926f5df0dcab988e75ecbcbd59e10e6f
 
   res.send(mybooks);
 };
@@ -97,22 +101,3 @@ module.exports.getWishList = async (req, res) => {
 
   res.send(wishBooks);
 };
-
-
-module.exports.deleteBook = async  (req,res) => {
-  // res.send("delete book is accesible")
-
-  const book = await Book.findById(req.body.book)
-  console.log(req.user._id,book.owner)
-  if(req.user._id != book.owner){
-    return res.status(401).send("you are not the owner so you cannot delete the book")
-  }
-  try{
-    const deletedBook = await Book.deleteOne({_id:book._id})
-    res.send(deletedBook)
-  }
-  catch( err){
-    return res.status(401).send("error in deleting book")
-  }
-  res.send("book is deleted")
-}

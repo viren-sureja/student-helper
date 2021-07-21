@@ -6,9 +6,9 @@ export const getCollection =
     try {
       const token = localStorage.getItem("user");
       const response = await axios.get("/books/collection", {
-        headers: {
-          "auth-token": token,
-        },
+        // headers: {
+        //   "auth-token": token,
+        // },
       });
       console.log(response.data);
       setAllBook(response.data);
