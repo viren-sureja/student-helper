@@ -205,7 +205,7 @@ const ContactUser = (props) => {
                 primary={response.content}
                 secondary={response.createdAt}
                 style={{
-                  marginRight: `${response.sender === id ? null : "20px"}`,
+                  marginRight: `${response.sender === id ? null : "15px"}`,
                 }}
               />
 
@@ -213,7 +213,7 @@ const ContactUser = (props) => {
                 <ListItemSecondaryAction>
                   <Avatar
                     alt="Remy Sharp"
-                    src="https://material-ui.com/static/images/avatar/1.jpg"
+                    src="https://material-ui.com/static/images/avatar/2.jpg"
                   />
                 </ListItemSecondaryAction>
               )}

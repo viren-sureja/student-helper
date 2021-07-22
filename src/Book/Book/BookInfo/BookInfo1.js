@@ -132,7 +132,7 @@ const BookInfo1 = (props) => {
                       <BookIcon />
                     </ListItemIcon>
                     <ListItemText
-                      primary="Name Name Name Name Name"
+                      primary="Name"
                       secondary={`${book.title}`}
                       className={classes.itemText}
                     />
