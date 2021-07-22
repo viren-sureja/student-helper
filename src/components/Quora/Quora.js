@@ -25,7 +25,7 @@ function Quora() {
         setShowSaved(true);
         setTag('all');
         setUniversity('');
-        console.log(showSaved, 'hi');
+        // console.log(showSaved, 'hi');
     };
 
     return (

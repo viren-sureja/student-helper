@@ -79,9 +79,10 @@ function Feed({ tag, university, handleTag, showSaved }) {
 
             // console.log('hello');
         } else setDummyPosts(posts);
+        console.log(showSaved);
 
         // console.log('HIIIiiii');
-    }, [tag, university]);
+    }, [showSaved, tag, university]);
 
     return (
         <div className="feed">
