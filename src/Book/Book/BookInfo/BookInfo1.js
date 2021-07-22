@@ -235,19 +235,19 @@ const BookInfo1 = (props) => {
                 </Grid>
                 <Grid item style={{ margin: "10px" }}>
                   <Button
-                    onClick={() => {
-                      localStorage.setItem("owner", book.owner);
-                      history.push("/chat");
-                    }}
+                    // onClick={() => {
+                    //   localStorage.setItem("owner", book.owner);
+                    //   history.push("/chat");
+                    // }}
                     variant="outlined"
                     startIcon={<ContactPhoneIcon />}
-
-                    // to={{
-                    //   pathname: "/chat",
-                    //   state: {
-                    //     ownerId: book.owner,
-                    //   },
-                    // }}
+                    component={Link}
+                    to={{
+                      pathname: "/chat",
+                      state: {
+                        ownerId: book.owner,
+                      },
+                    }}
                   >
                     Contact Seller
                   </Button>
