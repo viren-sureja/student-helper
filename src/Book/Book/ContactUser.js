@@ -306,7 +306,7 @@ const ContactUser = (props) => {
                 <ListItemIcon>
                   <Avatar
                     alt="Alice"
-                    src="https://material-ui.com/static/images/avatar/2.jpg"
+                    src="https://material-ui.com/static/images/avatar/1.jpg"
                   />
                 </ListItemIcon>
                 <ListItemText primary="Shivam" className={classes.itemText} />
