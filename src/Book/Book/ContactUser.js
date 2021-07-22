@@ -3,6 +3,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Navbar from "../Home/HomeComponents/Navbar";
 import ChatForm from "./ChatForm";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import axios from "../axios";
 import { Link as LinkS, animateScroll } from "react-scroll";
 import { io } from "socket.io-client";
@@ -188,20 +189,39 @@ const ContactUser = (props) => {
                 }`,
               }}
             >
-              <Grid container>
-                <Grid item xs={12}>
-                  <ListItemText
-                    align={`${response.sender === id ? "left" : "right"}`}
-                    primary={response.content}
-                  ></ListItemText>
-                </Grid>
-                <Grid item xs={12}>
-                  <ListItemText
-                    align={`${response.sender === id ? "left" : "right"}`}
-                    secondary={response.createdAt}
-                  ></ListItemText>
-                </Grid>
-              </Grid>
+              {response.sender === id ? (
+                <ListItemIcon>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="https://material-ui.com/static/images/avatar/1.jpg"
+                  />
+                </ListItemIcon>
+              ) : null}
+
+              {/* <Grid container justify="center" alignItems="center"> */}
+              <ListItemText
+                // style={{ backgroundColor: "black" }}
+                align={`${response.sender === id ? "left" : "right"}`}
+                primary={response.content}
+                secondary={response.createdAt}
+                style={{
+                  marginRight: `${response.sender === id ? null : "20px"}`,
+                }}
+              />
+
+              {response.sender === id ? null : (
+                <ListItemSecondaryAction>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="https://material-ui.com/static/images/avatar/1.jpg"
+                  />
+                </ListItemSecondaryAction>
+              )}
+              {/* <ListItemText
+                  align={`${response.sender === id ? "left" : "right"}`}
+                  secondary={response.createdAt}
+                /> */}
+              {/* </Grid> */}
             </ListItem>
           </Paper>
         </div>
@@ -323,7 +343,10 @@ const ContactUser = (props) => {
             <List
               className={classes.messageArea}
               dense
-              style={{ height: `${isMobile ? "57vh" : "58vh"}`, width: "100%" }}
+              style={{
+                height: `${isMobile ? "57vh" : "58vh"}`,
+                width: "100%",
+              }}
             >
               {renderMessages()}
             </List>
