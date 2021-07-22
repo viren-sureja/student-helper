@@ -14,13 +14,17 @@
 
 .sidebarOption:hover {
     /* background: rgb(211, 211, 211); */
-    background: #f5c476;
+    background: #14213d;
     border-radius: 5px;
+}
+
+.sidebarOption:hover > p {
     color: white;
 }
 
 .sidebarOption > img {
     height: 30px;
+    width: 30px;
     border-radius: 5px;
     margin-left: 20px;
 }

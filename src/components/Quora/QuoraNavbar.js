@@ -1,7 +1,5 @@
-import { Avatar, Button, Input } from '@material-ui/core';
-import { ExpandMore, Link } from '@material-ui/icons';
-// import AssignmentTurnedInOutlinedIcon from '@material-ui/icons/AssignmentTurnedInOutlined';
-// import FeaturedPlayListOutlinedIcon from '@material-ui/icons/FeaturedPlayListOutlined';
+import { Avatar, Button } from '@material-ui/core';
+import BookmarksIcon from '@material-ui/icons/Bookmarks';
 import HomeIcon from '@material-ui/icons/Home';
 // import LanguageIcon from '@material-ui/icons/Language';
 import NotificationsOutlinedIcon from '@material-ui/icons/NotificationsOutlined';
@@ -22,7 +20,7 @@ require('dotenv').config();
 
 Modal.setAppElement('#root');
 
-function QuoraNavbar({ handleUniversity }) {
+function QuoraNavbar({ handleUniversity, handleSavedPost }) {
     const user = useSelector(selectUser);
     const [openModal, setOpenModal] = useState(false);
     const [input, setInput] = useState('');
@@ -66,6 +64,7 @@ function QuoraNavbar({ handleUniversity }) {
                             downVote: 0,
                             tags: tags,
                             univComp: inputUniv,
+                            savedPost: [],
                         });
                     }
                 });
@@ -80,6 +79,7 @@ function QuoraNavbar({ handleUniversity }) {
                     downVote: 0,
                     tags: tags,
                     univComp: inputUniv,
+                    savedPost: [],
                 });
             }
         }
@@ -140,11 +140,14 @@ function QuoraNavbar({ handleUniversity }) {
                 <div className="qHeader__icon">
                     <HomeIcon />
                 </div>
-                <div className="qHeader__icon">
+                {/* <div className="qHeader__icon">
                     <PeopleAltOutlinedIcon />
-                </div>
-                <div className="qHeader__icon">
+                </div> */}
+                {/* <div className="qHeader__icon">
                     <NotificationsOutlinedIcon />
+                </div> */}
+                <div onClick={handleSavedPost} className="qHeader__icon">
+                    <BookmarksIcon />
                 </div>
             </div>
             <div className="qHeader__input">

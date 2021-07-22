@@ -36,6 +36,7 @@ const customStyle = {
 
 function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
     const user = useSelector(selectUser);
+    // console.log(user);
     const dispatch = useDispatch();
 
     const [IsmodalOpen, setIsModalOpen] = useState(false);
@@ -44,6 +45,8 @@ function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
     const [getAnswers, setGetAnswers] = useState([]);
     const [upvote, setUpvote] = useState(upVote);
     const [downvote, setDownvote] = useState(downVote);
+    const [upButtonClicked, setUpButtonClicked] = useState(false);
+    const [downButtonClicked, setDownButtonClicked] = useState(false);
 
     useEffect(() => {
         if (questionId) {
@@ -76,31 +79,92 @@ function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 });
         }
-        // console.log(questionId);
         setAnswer('');
         setIsModalOpen(false);
     };
 
     const handleUpVote = () => {
-        setUpvote(upvote + 1);
-        // console.log(upvote);
-
-        db.collection('questions')
-            .doc(Id)
-            .update({
-                upVote: upvote + 1,
-            });
+        if (!upButtonClicked) {
+            if (downButtonClicked) {
+                setDownvote(downvote - 1);
+                db.collection('questions').doc(Id).update({
+                    downVote: downvote,
+                });
+                setDownButtonClicked(false);
+            }
+            setUpvote(upvote + 1);
+            db.collection('questions')
+                .doc(Id)
+                .update({
+                    upVote: upvote + 1,
+                });
+            setUpButtonClicked(true);
+        }
     };
 
     const handleDownVote = () => {
-        setDownvote(downvote + 1);
-        // console.log(downvote);
+        if (!downButtonClicked) {
+            if (upButtonClicked) {
+                setUpvote(upvote - 1);
+                db.collection('questions')
+                    .doc(Id)
+                    .update({
+                        upVote: upvote - 1,
+                    });
+                setUpButtonClicked(false);
+            }
+            setDownvote(downvote + 1);
+            db.collection('questions')
+                .doc(Id)
+                .update({
+                    downVote: downvote + 1,
+                });
+            setDownButtonClicked(true);
+        }
+    };
+
+    const handleSave = e => {
+        e.preventDefault();
+
+        let currArr = [];
+
+        console.log('handling save');
 
         db.collection('questions')
             .doc(Id)
-            .update({
-                downVote: downvote + 1,
+            .get()
+            .then(doc => {
+                currArr = doc.data().savedPost;
+            })
+            .catch(error => {
+                console.log(error);
             });
+
+        currArr.push(user);
+
+        db.collection('questions').doc(Id).update({
+            savedPost: currArr,
+        });
+    };
+
+    const handleDelete = e => {
+        e.preventDefault();
+
+        console.log(typeof questionId, questionId === null);
+
+        if (questionId) {
+            db.collection('questions')
+                .doc(questionId)
+                .delete()
+                .then(() => {
+                    console.log('finally deleted');
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+
+        console.log('deleted!!!');
     };
 
     return (
@@ -126,6 +190,7 @@ function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
                 <h4>{users.displayName ? users.displayName : users.email}</h4>
                 <small>{new Date(timestamp?.toDate()).toLocaleString()}</small>
             </div>
+            <hr />
             <div className="post__body">
                 <div className="post__question">
                     <p>{question}</p>
@@ -186,7 +251,7 @@ function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
                         alt="QuestionImage was not added while posting the question"
                     />
                 )}
-                <div className="border__bottom"></div>
+                <div className="border__bottom" />
                 <div className="post__answer">
                     <button
                         onClick={() => setIsModalOpen(true)}
@@ -247,6 +312,10 @@ function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
                         <span>{downvote}</span>
                     </button>
                 </div>
+                <button onClick={handleSave}>save post</button>
+                {user.uid === users.uid && (
+                    <button onClick={handleDelete}>delete</button>
+                )}
 
                 {/* <RepeatOutlinedIcon /> */}
 
@@ -254,7 +323,7 @@ function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
 
                 <div className="post__footerLeft">
                     {/* <ShareOutlined /> */}
-                    <MoreHorizOutlined />
+                    {/* <MoreHorizOutlined /> */}
                 </div>
             </div>
         </div>
