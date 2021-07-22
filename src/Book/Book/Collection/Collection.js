@@ -139,7 +139,6 @@ const Collection = (props) => {
             container
             justify="center"
             alignItems="center"
-            spacing={3}
             style={{ marginBlock: "10px" }}
           >
             <div style={{ margin: "10px" }}>
