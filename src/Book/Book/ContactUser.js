@@ -38,6 +38,9 @@ const useStyles = makeStyles({
   recentUsers: {
     overflowY: "auto",
   },
+  itemText: {
+    marginLeft: "-12px",
+  },
   borderRight500: {
     borderRight: "1px solid #e0e0e0",
   },
@@ -254,9 +257,14 @@ const ContactUser = (props) => {
   return (
     <div>
       <Navbar />
-      <div style={{ margin: `${isMobile ? "5px" : "30px"}` }}>
-        <Grid container>
-          <Grid item xs={12}>
+      <div
+        style={{
+          marginInline: `${isMobile ? "5px" : "30px"}`,
+          marginBlock: `${isMobile ? "5px" : "10px"}`,
+        }}
+      >
+        <Grid container justify="center" alignItems="center">
+          <Grid item xs={12} md={3}>
             <Typography variant="h5" className="header-message">
               {isMobile ? (
                 <IconButton
@@ -271,6 +279,19 @@ const ContactUser = (props) => {
               ) : null}
               Recent Chats
             </Typography>
+          </Grid>
+          <Grid item xs={12} md={9}>
+            <List dense style={{ marginTop: `${isMobile ? "-15px" : ""}` }}>
+              <ListItem>
+                <ListItemIcon>
+                  <Avatar
+                    alt="Alice"
+                    src="https://material-ui.com/static/images/avatar/2.jpg"
+                  />
+                </ListItemIcon>
+                <ListItemText primary="Shivam" className={classes.itemText} />
+              </ListItem>
+            </List>
           </Grid>
         </Grid>
         <Grid container component={Paper} className={classes.chatSection}>
@@ -302,7 +323,7 @@ const ContactUser = (props) => {
             <List
               className={classes.messageArea}
               dense
-              style={{ height: `${isMobile ? "63vh" : "57vh"}`, width: "100%" }}
+              style={{ height: `${isMobile ? "57vh" : "58vh"}`, width: "100%" }}
             >
               {renderMessages()}
             </List>
