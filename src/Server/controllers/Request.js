@@ -1,6 +1,7 @@
 const Book = require("../models/Book.js");
 const Request = require("../models/Request.js");
 const Trade = require("../models/Trade.js");
+const User = require("../models/User.js");
 const { addRequestValidator } = require("../validators/Request.js");
 
 module.exports.addRequest = async (req, res) => {
@@ -33,10 +34,15 @@ module.exports.addRequest = async (req, res) => {
     return res.status(400).send("book does not exist");
   }
 
+  const user1 = await User.findById(req.user._id)
+  const user2 = await User.findById(req.body.to)
+
   const request = new Request({
     from: req.user._id,
     to: req.body.to,
     book: req.body.book,
+    toName : user2.name,
+    fromName : user1.name
   });
 
   try {
@@ -98,6 +104,8 @@ module.exports.confirmRequest = async (req, res) => {
   }
   console.log("This is the boooooookkkkkk", book);
   const trade = new Trade({
+    toName: request.fromName,
+    fromName : request.toName,
     to: request.from,
     from: req.user._id,
     book: book._id,
@@ -114,6 +122,14 @@ module.exports.confirmRequest = async (req, res) => {
 
   // const result2 = await Book.find({ _id: book._id }).remove().exec();
   // console.log(result2);
+
+  //upadte the book with issold true
+  const result2 = await Book.findOneAndUpdate(
+    { _id: book._id },
+    { isSold : true }
+  );
+  console.log(result2)
+
   // Logic for trade redu...
   res.send(savedTrade);
 };

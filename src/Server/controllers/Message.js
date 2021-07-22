@@ -1,4 +1,5 @@
 const Message = require("../models/Message");
+const User = require("../models/User");
 const { getMessageValidator } = require("../validators/Message");
 
 module.exports.addMessage = async (req,res) => {
@@ -31,6 +32,7 @@ module.exports.getMessage = async (req,res) => {
       { sender : req.user._id, receiver : req.query.id },
     ],
   });
+  console.log(messages)
   // console.log(messages)
   // console.log(req.user._id)
   // console.log(req.body.id)
@@ -58,6 +60,13 @@ module.exports.getRecentUsers = async (req,res) => {
   var arr = recentusers2.concat(recentusers1)
   var mySet = new Set(arr)
   var filteredArray = Array.from(mySet)
+
+  for(var i=0;i<filteredArray.length;++i){
+    const tempUser = await User.findById(filteredArray[i])
+    filteredArray[i] = {_id : filteredArray[i], name : tempUser.name}
+  }
+
+
   // console.log(filteredArray, "filtererd")
   res.send(filteredArray)
 
