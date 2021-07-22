@@ -1,45 +1,29 @@
 import React, { useState } from "react";
 import Navbar from "../Home/HomeComponents/Navbar";
 
+const ChatForm = ({ onSendButton }) => {
+  const [currentContent, setcurrentContent] = useState("");
 
-// const ChatForm = (props) => {
-  
-//   return (
-//     <div>
-//       <Navbar />
-//       <div style={{ margin: "30px" }}>
-        
-//         ChatForm
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ChatForm;
-
-const  ChatForm = ({onSendButton}) => {
-  const [content, setContent] = useState("");
-  
   const handleSubmit = (evt) => {
-      evt.preventDefault();
-      //alert(`Submitting Content ${content}`)
-      onSendButton(content)
-      setContent("")
-  }
+    evt.preventDefault();
+    //alert(`Submitting currentContent ${currentContent}`)
+    onSendButton(currentContent);
+    setcurrentContent("");
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Content:
+        currentContent:
         <input
           type="text"
-          value={content}
-          onChange={e => setContent(e.target.value)}
+          value={currentContent}
+          onChange={(e) => setcurrentContent(e.target.value)}
         />
       </label>
       <input type="submit" value="Submit" />
     </form>
   );
-}
+};
 
 export default ChatForm;

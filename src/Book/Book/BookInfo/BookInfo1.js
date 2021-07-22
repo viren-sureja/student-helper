@@ -132,7 +132,7 @@ const BookInfo1 = (props) => {
                       <BookIcon />
                     </ListItemIcon>
                     <ListItemText
-                      primary="Name Name Name Name Name"
+                      primary="Name"
                       secondary={`${book.title}`}
                       className={classes.itemText}
                     />
@@ -235,19 +235,19 @@ const BookInfo1 = (props) => {
                 </Grid>
                 <Grid item style={{ margin: "10px" }}>
                   <Button
-                    onClick={() => {
-                      localStorage.setItem("owner", book.owner);
-                      history.push("/chat");
-                    }}
+                    // onClick={() => {
+                    //   localStorage.setItem("owner", book.owner);
+                    //   history.push("/chat");
+                    // }}
                     variant="outlined"
                     startIcon={<ContactPhoneIcon />}
-
-                    // to={{
-                    //   pathname: "/chat",
-                    //   state: {
-                    //     ownerId: book.owner,
-                    //   },
-                    // }}
+                    component={Link}
+                    to={{
+                      pathname: "/chat",
+                      state: {
+                        ownerId: book.owner,
+                      },
+                    }}
                   >
                     Contact Seller
                   </Button>

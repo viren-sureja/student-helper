@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
@@ -161,31 +162,73 @@ const MyCollection = (props) => {
           </Button>
         </div>
         <div>
-          <div>
-            <label>Search:</label>
-            <input
-              type="text"
-              value={searchInput}
-              onChange={(event) => handleSearch(event)}
-            />
-          </div>
-          <div>
-            <label>sort : </label>
-            <FormControl>
-              <InputLabel id="demo-simple-select-label">Sort Type</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={sortType}
-                onChange={handleChange}
-              >
-                <MenuItem value={1}>oldfirst : date</MenuItem>
-                <MenuItem value={2}>newestfirst : date</MenuItem>
-                <MenuItem value={3}>high-to-low : price</MenuItem>
-                <MenuItem value={4}>low-to-high : price</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
+          <Grid
+            container
+            justify="center"
+            alignItems="center"
+            style={{ marginBlock: "10px" }}
+          >
+            <div style={{ margin: "10px" }}>
+              <TextField
+                id="searchInput"
+                name="searchInput"
+                type="text"
+                label="Search:"
+                value={searchInput}
+                onChange={(event) => handleSearch(event)}
+                variant="outlined"
+              />
+            </div>
+            <div style={{ margin: "10px" }}>
+              <FormControl>
+                <InputLabel id="demo-simple-select-label">Sort Type</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={sortType}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={1}>oldfirst : date</MenuItem>
+                  <MenuItem value={2}>newestfirst : date</MenuItem>
+                  <MenuItem value={3}>high-to-low : price</MenuItem>
+                  <MenuItem value={4}>low-to-high : price</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <div style={{ margin: "10px" }}>
+              <FormControl>
+                <InputLabel id="demo-simple-select-label">
+                  University
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={sortType}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={1}>oldfirst : date</MenuItem>
+                  <MenuItem value={2}>newestfirst : date</MenuItem>
+                  <MenuItem value={3}>high-to-low : price</MenuItem>
+                  <MenuItem value={4}>low-to-high : price</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <div style={{ margin: "10px" }}>
+              <FormControl>
+                <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={sortType}
+                  onChange={handleChange}
+                >
+                  <MenuItem value={1}>All</MenuItem>
+                  <MenuItem value={2}>Books</MenuItem>
+                  <MenuItem value={3}>Other Items</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+          </Grid>
           <Grid
             container
             justify="center"

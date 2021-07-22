@@ -9,6 +9,14 @@ const RequestSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  toName : {
+    type : String,
+    required : true
+  },
+  fromName : {
+    type : String,
+    required : true
+  },
   book: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Book",

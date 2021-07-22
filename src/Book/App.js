@@ -52,14 +52,14 @@ const App = (props) => {
           <Route
             path="/chat"
             exact
-            render={() => {
-              return props.isSignedIn !== false ? (
-                <ContactUser />
-              ) : (
-                <Redirect to="/login" />
-              );
-            }}
-            // component={ContactUser}
+            // render={() => {
+            //   return props.isSignedIn !== false ? (
+            //     <ContactUser />
+            //   ) : (
+            //     <Redirect to="/login" />
+            //   );
+            // }}
+            component={ContactUser}
           />
           <Route
             path="/trades"

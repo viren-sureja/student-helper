@@ -39,6 +39,10 @@ const BookSchema = mongoose.Schema({
       ref: "User",
     },
   ],
+  isSold : {
+    type: Boolean,
+    default: false
+  }
 })
 
 const Book = mongoose.model('Book',BookSchema)
