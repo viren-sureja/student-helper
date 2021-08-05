@@ -5,7 +5,7 @@ import { selectUser } from '../../features/userSlice';
 import db from '../../firebase';
 import Post from './Post';
 
-function Feed({ tag, university, handleTag, showSaved }) {
+function Feed({ tag, university, handleTag, showSaved, showMyPost }) {
     const user = useSelector(selectUser);
     // let tempTag = tag;
     const [posts, setPosts] = useState([]);
@@ -30,7 +30,19 @@ function Feed({ tag, university, handleTag, showSaved }) {
     const checkArray = newPosts => {
         let updatedPost = [];
 
-        if (tag === 'all' && university === '' && showSaved) {
+        if (tag === 'all' && university === '' && showMyPost) {
+            // eslint-disable-next-line array-callback-return
+            // console.log(tag, university, showMyPost);
+            newPosts.map(post => {
+                console.log(user.uid);
+                console.log(post.questions.user.uid);
+                // console.log(post.question.user.uid);
+                if (user.uid === post.questions.user.uid) {
+                    console.log('hello');
+                    updatedPost.push(post);
+                }
+            });
+        } else if (tag === 'all' && university === '' && showSaved) {
             // eslint-disable-next-line array-callback-return
             newPosts.map(post => {
                 let currUsers = post.questions.savedPost;
@@ -79,10 +91,10 @@ function Feed({ tag, university, handleTag, showSaved }) {
 
             // console.log('hello');
         } else setDummyPosts(posts);
-        console.log(showSaved);
+        // console.log(showSaved);
 
         // console.log('HIIIiiii');
-    }, [showSaved, tag, university]);
+    }, [showMyPost, showSaved, tag, university]);
 
     return (
         <div className="feed">
@@ -97,6 +109,7 @@ function Feed({ tag, university, handleTag, showSaved }) {
                     users={questions.user}
                     upVote={questions.upVote}
                     downVote={questions.downVote}
+                    showMyPost={showMyPost}
                 />
             ))}
         </div>

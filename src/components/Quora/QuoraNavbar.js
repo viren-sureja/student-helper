@@ -1,5 +1,6 @@
 import { Avatar, Button } from '@material-ui/core';
 import BookmarksIcon from '@material-ui/icons/Bookmarks';
+import EditIcon from '@material-ui/icons/Edit';
 import HomeIcon from '@material-ui/icons/Home';
 // import LanguageIcon from '@material-ui/icons/Language';
 import NotificationsOutlinedIcon from '@material-ui/icons/NotificationsOutlined';
@@ -20,7 +21,7 @@ require('dotenv').config();
 
 Modal.setAppElement('#root');
 
-function QuoraNavbar({ handleUniversity, handleSavedPost }) {
+function QuoraNavbar({ handleUniversity, handleSavedPost, handleMyPost }) {
     const user = useSelector(selectUser);
     const [openModal, setOpenModal] = useState(false);
     const [input, setInput] = useState('');
@@ -148,6 +149,9 @@ function QuoraNavbar({ handleUniversity, handleSavedPost }) {
                 </div> */}
                 <div onClick={handleSavedPost} className="qHeader__icon">
                     <BookmarksIcon />
+                </div>
+                <div onClick={handleMyPost} className="qHeader__icon">
+                    <EditIcon />
                 </div>
             </div>
             <div className="qHeader__input">

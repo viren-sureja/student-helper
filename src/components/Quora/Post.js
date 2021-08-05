@@ -34,7 +34,16 @@ const customStyle = {
     },
 };
 
-function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
+function Post({
+    Id,
+    question,
+    imageUrl,
+    timestamp,
+    users,
+    upVote,
+    downVote,
+    showMyPost,
+}) {
     const user = useSelector(selectUser);
     // console.log(user);
     const dispatch = useDispatch();
@@ -313,9 +322,7 @@ function Post({ Id, question, imageUrl, timestamp, users, upVote, downVote }) {
                     </button>
                 </div>
                 <button onClick={handleSave}>save post</button>
-                {user.uid === users.uid && (
-                    <button onClick={handleDelete}>delete</button>
-                )}
+                {showMyPost && <button onClick={handleDelete}>delete</button>}
 
                 {/* <RepeatOutlinedIcon /> */}
 
