@@ -3,7 +3,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
+import { CircularProgress } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -103,19 +103,26 @@ const Trades = (props) => {
             spacing={3}
             style={{ marginBlock: "10px" }}
           >
-            {props.trades.map((trade) => {
-              return (
-                <Grid item key={trade._id}>
-                  <BookCard
-                    book={trade.book}
-                    reqDate=""
-                    to={trade.to}
-                    from={trade.from}
-                    tradeDate={trade.tradedAt}
-                  />
-                </Grid>
-              );
-            })}
+            {props.trades ? (
+              props.trades.map((trade) => {
+                return (
+                  <Grid item key={trade._id}>
+                    <BookCard
+                      book={trade.book}
+                      reqDate=""
+                      to={trade.to}
+                      toName={trade.toName}
+                      fromName={trade.fromName}
+                      from={trade.from}
+                      tradeDate={trade.tradedAt}
+                    />
+                  </Grid>
+                );
+              })
+            ) : (
+              <CircularProgress />
+            )}
+            {}
           </Grid>
         </div>
       </div>

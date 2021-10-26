@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import SchoolIcon from "@material-ui/icons/School";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
@@ -90,12 +91,7 @@ const Footer = () => {
             }}
           >
             <Grid item>
-              <img
-                src="./icon.svg"
-                width="40"
-                height="40"
-                alt="React Bootstrap logo"
-              />
+              <SchoolIcon style={{ color: "white", fontSize: "30px" }} />
             </Grid>
             <Grid item>
               <Typography
@@ -104,7 +100,7 @@ const Footer = () => {
                 color="initial"
                 style={{
                   display: "inline",
-                  // marginLeft: "5px",
+                  marginLeft: "7px",
                   color: "white",
                 }}
               >
@@ -236,7 +232,7 @@ const Footer = () => {
                   variant="outlined"
                   style={{ color: "green" }}
                 >
-                  Login
+                  Send
                 </Button>
               </Grid>
             </form>

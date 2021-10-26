@@ -42,6 +42,7 @@ const BookCard = (props) => {
     };
     props.addtoWishList(updatedbook);
     setBook(updatedbook);
+    // request fail thae to???
   };
 
   const removeFromWish = () => {
@@ -84,8 +85,8 @@ const BookCard = (props) => {
                       className="bookCard_overflow-text"
                     >
                       {props.to !== ""
-                        ? `To : ${props.to}`
-                        : `From : ${props.from}`}
+                        ? `To : ${props.toName}`
+                        : `From : ${props.fromName}`}
                     </Typography>
                   </div>
                   <div
@@ -188,7 +189,7 @@ const BookCard = (props) => {
                       style={{ marginLeft: "8px" }}
                       className="bookCard_overflow-text"
                     >
-                      Owner : {props.from}
+                      Owner : {props.fromName}
                     </Typography>
                   </div>
                   <div
@@ -201,7 +202,7 @@ const BookCard = (props) => {
                       style={{ marginLeft: "8px" }}
                       className="bookCard_overflow-text"
                     >
-                      Buyer : {props.to}
+                      Buyer : {props.toName}
                     </Typography>
                   </div>
                   <div
@@ -237,11 +238,18 @@ const BookCard = (props) => {
                   {"₹"}
                   {props.book.sellingPrice}
                 </Typography>
-                {book.wishListedBy.includes(currentUserId) ? (
+                {props.tradeDate ? null : book.wishListedBy.includes(
+                    currentUserId
+                  ) ? (
                   <FavoriteIcon onClick={() => removeFromWish()} />
                 ) : (
                   <FavoriteBorderIcon onClick={() => addToWish()} />
                 )}
+                {/* {book.wishListedBy.includes(currentUserId) ? (
+                  <FavoriteIcon onClick={() => removeFromWish()} />
+                ) : (
+                  <FavoriteBorderIcon onClick={() => addToWish()} />
+                )} */}
                 {/* <FavoriteBorderIcon /> */}
               </div>
               <div className="bookCard_together bookCard_secondary-text">
@@ -289,12 +297,13 @@ const BookCard = (props) => {
                   marginBlock: "8px",
                 }}
                 component={Link}
-                to={{
-                  pathname: "/bookInfo1",
-                  state: {
-                    book: props.book,
-                  },
-                }}
+                // to={{
+                //   pathname: "/bookInfo1",
+                //   state: {
+                //     book: props.book,
+                //   },
+                // }}
+                to={`/bookInfo1/${book._id}`}
                 variant="outlined"
                 // className="optionCard-cardButton"
                 startIcon={<InfoIcon style={{ fontSize: "15px" }} />}

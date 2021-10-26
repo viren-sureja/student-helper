@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Navbar from "../Home/HomeComponents/Navbar";
+import BookNavbar from "./BookNavbar";
 import ChatForm from "./ChatForm";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import axios from "../axios";
@@ -17,6 +17,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
 import List from "@material-ui/core/List";
+import { Link } from "react-router-dom";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -27,9 +28,21 @@ import SendIcon from "@material-ui/icons/Send";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import Drawer from "@material-ui/core/Drawer";
+import RecentUsers from "./RecentUsers/RecentUsers";
+import { getRecentUsers } from "../actions/recentUsersAction";
+import history from "../history";
+import { connect } from "react-redux";
+import { CircularProgress } from "@material-ui/core";
+
 import CustomizedSnackbars from "../CustomizedSnackbars";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
   chatSection: {
     width: "100%",
   },
@@ -52,7 +65,7 @@ const useStyles = makeStyles({
     display: "flex",
     alignSelf: "center",
   },
-});
+}));
 
 const ContactUser = (props) => {
   const classes = useStyles();
@@ -65,14 +78,28 @@ const ContactUser = (props) => {
   useEffect(() => {
     setMobileOpen(false);
   }, [isMobile]);
-  // var props.location.state.ownerId = localStorage.getItem("props.location.state.ownerId");
+  var curr_name = localStorage.getItem("user_name");
   // localStorage.removeItem("props.location.state.ownerId");
-  const [id, setId] = useState(props.location.state.ownerId);
+  const [id, setId] = useState(props.match.params.id);
+  const [name, setName] = useState(null);
   const [messages, SetMessages] = useState([]);
   const [currentContent, setcurrentContent] = useState("");
   const scrollRef = useRef();
   const socket = useRef();
+  const [open, setOpen] = React.useState(false);
   const currentUserId = localStorage.getItem("user_id");
+  var snackbarMessage = "other user!";
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const mounted = useRef();
 
@@ -92,6 +119,7 @@ const ContactUser = (props) => {
   });
 
   useEffect(() => {
+    props.getRecentUsers();
     setId(id);
     return function cleanup() {
       console.log("routes has chnages now its time for disconnection");
@@ -113,7 +141,12 @@ const ContactUser = (props) => {
       //   <CustomizedSnackbars />
       // return
       // }
-
+      if (!(data.senderId === id)) {
+        snackbarMessage = String(data.senderName);
+        handleClick();
+        console.log(snackbarMessage);
+        return;
+      }
       const arrivedMessage = {
         content: data.text,
         receiver: currentUserId,
@@ -144,6 +177,32 @@ const ContactUser = (props) => {
     }
     console.log(messages);
     fetchMessage();
+    const fetchUserDetails = async () => {
+      console.log("lol");
+      try {
+        const token = localStorage.getItem("user");
+        const response = await axios.get("/users/userInfo", {
+          headers: {
+            "auth-token": token,
+          },
+          params: {
+            _id: id,
+          },
+        });
+        console.log(response.data);
+        setName(response.data.name);
+      } catch (e) {
+        console.log(e);
+        console.log(e.response.data);
+        if (
+          e.response.data === "Invalid Token" ||
+          e.response.data === "Access denied"
+        ) {
+          history.push("/login");
+        }
+      }
+    };
+    fetchUserDetails();
     console.log(messages);
   }, [id]);
 
@@ -157,13 +216,20 @@ const ContactUser = (props) => {
     socket.current.emit("sendMessage", {
       senderId: currentUserId,
       receiverId: id,
+      senderName: name,
       text: content,
     });
+    const newMesage = {
+      sender: currentUserId,
+      receiver: id,
+      content: content,
+      createdAt: Date.now(),
+    };
     console.log(content);
     const token = localStorage.getItem("user");
     const response = await axios.post(
       "/books/addMessage",
-      { receiver: props.location.state.ownerId, content: content },
+      { receiver: id, content: content },
       {
         headers: {
           "Content-Type": "application/json",
@@ -173,7 +239,7 @@ const ContactUser = (props) => {
     );
 
     //console.log(response)
-    SetMessages([...messages, response.data]);
+    SetMessages((prev) => [...prev, newMesage]);
   };
 
   const renderMessages = () => {
@@ -238,13 +304,63 @@ const ContactUser = (props) => {
               src="https://material-ui.com/static/images/avatar/1.jpg"
             />
           </ListItemIcon>
-          <ListItemText primary="John Wick"></ListItemText>
+          <ListItemText primary={curr_name}></ListItemText>
         </ListItem>
       </List>
       <Divider />
 
       <List>
-        <ListItem button key="RemySharp">
+        {props.recentUsers ? (
+          props.recentUsers.map((user) => {
+            return (
+              <ListItem
+                button
+                key="RemySharp"
+                component={Link}
+                to={{
+                  pathname: `/userProfile/${user._id}`,
+                }}
+              >
+                <ListItemIcon>
+                  <Avatar
+                    alt="Remy Sharp"
+                    src="https://material-ui.com/static/images/avatar/1.jpg"
+                  />
+                </ListItemIcon>
+                <ListItemText
+                  // component={Link}
+                  // to={{
+                  //   pathname: `/userProfile/${user._id}`,
+                  // }}
+                  primary={user.name}
+                ></ListItemText>
+              </ListItem>
+              // <Grid item key={user._id}>
+              //   <Button
+              //     variant="contained"
+              //     color="primary"
+              //     component={Link}
+              //     // to={`/chat/:${user._id}`}
+              //     // to={{
+              //     //   pathname: "/userProfile",
+              //     //   state: {
+              //     //     owner: user._id,
+              //     //     ownerName : user.name
+              //     //   }
+              //     // }}
+              //     to={{
+              //       pathname: `/userProfile/${user._id}`,
+              //     }}
+              //   >
+              //     Contact {user.name}
+              //   </Button>
+              // </Grid>
+            );
+          })
+        ) : (
+          <CircularProgress />
+        )}
+        {/* <ListItem button key="RemySharp">
           <ListItemIcon>
             <Avatar
               alt="Remy Sharp"
@@ -252,31 +368,13 @@ const ContactUser = (props) => {
             />
           </ListItemIcon>
           <ListItemText primary="Remy Sharp">Remy Sharp</ListItemText>
-        </ListItem>
-        <ListItem button key="Alice">
-          <ListItemIcon>
-            <Avatar
-              alt="Alice"
-              src="https://material-ui.com/static/images/avatar/3.jpg"
-            />
-          </ListItemIcon>
-          <ListItemText primary="Alice">Alice</ListItemText>
-        </ListItem>
-        <ListItem button key="CindyBaker">
-          <ListItemIcon>
-            <Avatar
-              alt="Cindy Baker"
-              src="https://material-ui.com/static/images/avatar/2.jpg"
-            />
-          </ListItemIcon>
-          <ListItemText primary="Cindy Baker">Cindy Baker</ListItemText>
-        </ListItem>
+        </ListItem> */}
       </List>
     </div>
   );
   return (
     <div>
-      <Navbar />
+      <BookNavbar />
       <div
         style={{
           marginInline: `${isMobile ? "5px" : "30px"}`,
@@ -309,7 +407,7 @@ const ContactUser = (props) => {
                     src="https://material-ui.com/static/images/avatar/1.jpg"
                   />
                 </ListItemIcon>
-                <ListItemText primary="Shivam" className={classes.itemText} />
+                <ListItemText primary={name} className={classes.itemText} />
               </ListItem>
             </List>
           </Grid>
@@ -383,6 +481,17 @@ const ContactUser = (props) => {
           
         </div> */}
         {/* <ChatForm onSendButton={onSendButton} /> */}
+        {/* <RecentUsers /> */}
+        <Snackbar
+          className={classes.root}
+          open={open}
+          autoHideDuration={2000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity="info">
+            There is message from {snackbarMessage}
+          </Alert>
+        </Snackbar>
       </div>
     </div>
   );
@@ -392,4 +501,10 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" />;
 }
 
-export default ContactUser;
+const mapStateToProps = (state) => {
+  return {
+    recentUsers: Object.values(state.recentUsers),
+  };
+};
+
+export default connect(mapStateToProps, { getRecentUsers })(ContactUser);

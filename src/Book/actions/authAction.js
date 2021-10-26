@@ -1,6 +1,5 @@
 import history from "../history";
 import axios from "../axios";
-import { stubTrue } from "lodash-es";
 
 export const login = (values) => async (dispatch, getState) => {
   try {
@@ -11,7 +10,9 @@ export const login = (values) => async (dispatch, getState) => {
     });
     localStorage.setItem("user", response.data.token);
     localStorage.setItem("user_id", response.data.user);
+    localStorage.setItem("user_name", response.data.name);
     dispatch({ type: "login" });
+    // dispatch({ type: "login", payload: response.data.user });
     history.push("/collection");
   } catch (e) {
     console.log(e);
@@ -50,4 +51,7 @@ export const verifyLogin = () => async (dispatch, getState) => {
     console.log(e);
     dispatch({ type: "verifyLogin", payload: false });
   }
+};
+export const logout = () => async (dispatch, getState) => {
+  dispatch({ type: "logout" });
 };

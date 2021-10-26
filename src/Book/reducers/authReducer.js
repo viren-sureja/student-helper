@@ -1,5 +1,3 @@
-import { TramRounded } from "@material-ui/icons";
-
 const INTIAL_STATE = {
   isSignedIn: null,
 };
@@ -9,6 +7,8 @@ export default (state = INTIAL_STATE, action) => {
       return { ...state, isSignedIn: action.payload };
     case "login":
       return { ...state, isSignedIn: true };
+    case "logout":
+      return INTIAL_STATE;
     default:
       return state;
   }

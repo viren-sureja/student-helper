@@ -19,6 +19,7 @@ const Options = () => {
                   optionDescription="Have a question, have an idea, wants to get updated with ongoing events in the university, or want to interact with peers and grow a network within a university, StudentHelper network is the answer to these questions. Explore now and enhance your college journey."
                   buttonText="Discover Now"
                   photo="./images/network.jpg"
+                  path="/collection"
                 />
               </center>
             </Grid>
@@ -30,6 +31,7 @@ const Options = () => {
                   optionDescription="Want to buy or sell some college stuff or books, StudentHelper store is a place of your need. Here you can buy from peers or sell to peers and can save money, also by reusing stuff make some contribution towards the healthy environment because every step counts."
                   buttonText="Get the best deal"
                   photo="./images/store.jpg"
+                  path="/collection"
                 />
               </center>
             </Grid>
@@ -40,6 +42,7 @@ const Options = () => {
                   optionDescription="Have a question, have an idea, wants to get updated with ongoing events in the university, or want to interact with peers and grow a network within a university, StudentHelper network is the answer to these questions. Explore now and enhance your college journey."
                   buttonText="Take me there"
                   photo="./images/calculator.jpg"
+                  path="/collection"
                 />
               </center>
             </Grid>

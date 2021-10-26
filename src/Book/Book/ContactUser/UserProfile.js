@@ -2,18 +2,16 @@ import React, { useEffect, useState } from "react";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import SchoolIcon from "@material-ui/icons/School";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
-import { getMyCollection } from "../../actions/getMyCollectionAction";
-// import ContactUser from "../ContactUser";
+import { getCollection } from "../../actions/getCollectionAction";
+// import ContactUser from "../Chat/Chat";
 import BookNavbar from "../BookNavbar";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -21,7 +19,10 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import BookCard from "../Card/BookCard";
+import history from "../../history";
+import axios from "../../axios";
 import { CircularProgress } from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
   addBook: {
     display: "flex",
@@ -39,21 +40,77 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
   },
 }));
-const MyCollection = (props) => {
+
+const UserProfile = (props) => {
   const [allbook, setAllBook] = useState([]);
   const [filteredCollection, setFilteredCollection] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [firstTime, setFirstTime] = useState(true);
   const [sortType, setSortType] = useState(1);
-
+  const [user, setUser] = useState(null);
+  console.log(props);
+  const userId = props.match.params.id;
+  // const userName = props.location.state.ownerName;
+  // console.log(props.location.state.owner);
+  // console.log(props.location.state.ownerName);
+  // console.log(props.location.state.owner)
   useEffect(() => {
-    // console.log("hii from initial use effect of collection before getcollectionaction")
-    props.getMyCollection(setFilteredCollection, setAllBook);
-    // setTimeout(() => timeOutCallback(props.collection),2000)
-    // console.log(props.collection)
-    // console.log("hii from initial use effect of collection")
-    // setFilteredCollection(props.collection)
-    // console.log(filteredCollection)
+    // props.getCollection(setFilteredCollection, setAllBook);
+
+    const fetchUserBooks = async () => {
+      try {
+        const token = localStorage.getItem("user");
+        const response = await axios.get("/books/userCollection", {
+          headers: {
+            "auth-token": token,
+          },
+          params: {
+            _id: userId,
+          },
+        });
+        console.log(response.data);
+        setAllBook(response.data);
+        setFilteredCollection(response.data);
+      } catch (e) {
+        console.log(e);
+        console.log(e.response.data);
+        if (
+          e.response.data === "Invalid Token" ||
+          e.response.data === "Access denied"
+        ) {
+          history.push("/login");
+        }
+      }
+    };
+
+    const fetchUserDetails = async () => {
+      console.log("lol");
+      try {
+        const token = localStorage.getItem("user");
+        const response = await axios.get("/users/userInfo", {
+          headers: {
+            "auth-token": token,
+          },
+          params: {
+            _id: userId,
+          },
+        });
+        console.log(response.data);
+        setUser(response.data);
+      } catch (e) {
+        console.log(e);
+        console.log(e.response.data);
+        if (
+          e.response.data === "Invalid Token" ||
+          e.response.data === "Access denied"
+        ) {
+          history.push("/login");
+        }
+      }
+    };
+
+    fetchUserBooks();
+    fetchUserDetails();
   }, []);
 
   useEffect(() => {});
@@ -151,37 +208,19 @@ const MyCollection = (props) => {
   return (
     <div>
       <BookNavbar />
-      <div className={classes.main}>
-        <div className={classes.addBook}>
-          <Button
-            component={Link}
-            to="/addBook"
-            variant="outlined"
-            style={{ color: "green", marginTop: "20px" }}
-            startIcon={<AddIcon style={{ fontSize: "15px" }} />}
-          >
-            Add Book
-          </Button>
-        </div>
-        <div>
-          <Grid
-            container
-            justify="center"
-            alignItems="center"
-            style={{ marginBlock: "10px" }}
-          >
-            <div style={{ margin: "10px" }}>
-              <TextField
-                id="searchInput"
-                name="searchInput"
+      {user ? (
+        <div className={classes.main}>
+          <div>
+            <div>
+              <label>Search:</label>
+              <input
                 type="text"
-                label="Search:"
                 value={searchInput}
                 onChange={(event) => handleSearch(event)}
-                variant="outlined"
               />
             </div>
-            <div style={{ margin: "10px" }}>
+            <div>
+              <label>sort : </label>
               <FormControl>
                 <InputLabel id="demo-simple-select-label">Sort Type</InputLabel>
                 <Select
@@ -190,74 +229,60 @@ const MyCollection = (props) => {
                   value={sortType}
                   onChange={handleChange}
                 >
-                  <MenuItem value={1}>Oldest To Newest</MenuItem>
-                  <MenuItem value={2}>Newest To Oldest</MenuItem>
-                  <MenuItem value={3}>High to Low</MenuItem>
-                  <MenuItem value={4}>Low to high</MenuItem>
+                  <MenuItem value={1}>oldfirst : date</MenuItem>
+                  <MenuItem value={2}>newestfirst : date</MenuItem>
+                  <MenuItem value={3}>high-to-low : price</MenuItem>
+                  <MenuItem value={4}>low-to-high : price</MenuItem>
                 </Select>
               </FormControl>
+              <Typography variant="subtitle1">
+                ownerName - {user.name}
+              </Typography>
+              <Button
+                variant="contained"
+                color="primary"
+                component={Link}
+                // to={{
+                //   pathname: "/chat",
+                //   state: {
+                //     owner: userId,
+                //     ownerName : user.name
+                //   },
+                // }}
+                to={`/chat/${userId}`}
+              >
+                Chat with Seller
+              </Button>
             </div>
-            <div style={{ margin: "10px" }}>
-              <FormControl>
-                <InputLabel id="demo-simple-select-label">
-                  University
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={sortType}
-                  onChange={handleChange}
-                >
-                  <MenuItem value={1}>Nirma University</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-            <div style={{ margin: "10px" }}>
-              <FormControl>
-                <InputLabel id="demo-simple-select-label">Category</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={sortType}
-                  onChange={handleChange}
-                >
-                  <MenuItem value={1}>All</MenuItem>
-                  <MenuItem value={2}>Books</MenuItem>
-                  <MenuItem value={3}>Other Items</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-          </Grid>
-          <Grid
-            container
-            justify="center"
-            alignItems="center"
-            spacing={3}
-            style={{ marginBlock: "10px" }}
-          >
-            {props.collection ? (
-              filteredCollection.map((collection) => {
-                return (
-                  <Grid item key={collection._id}>
-                    <BookCard book={collection} reqDate="" tradeDate="" />
-                    {/* {card(collection)} */}
-                  </Grid>
-                );
-              })
-            ) : (
-              <CircularProgress />
-            )}
-          </Grid>
+            <Grid
+              container
+              justify="center"
+              alignItems="center"
+              spacing={3}
+              style={{ marginBlock: "10px" }}
+            >
+              {filteredCollection ? (
+                filteredCollection.map((collection) => {
+                  return (
+                    <Grid item key={collection._id}>
+                      <BookCard book={collection} reqDate="" tradeDate="" />
+                      {/* {card(collection)} */}
+                    </Grid>
+                  );
+                })
+              ) : (
+                <CircularProgress />
+              )}
+            </Grid>
+          </div>
         </div>
-      </div>
+      ) : (
+        <CircularProgress />
+      )}
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    collection: Object.values(state.myCollection),
-  };
-};
+export default connect(null, {})(UserProfile);
 
-export default connect(mapStateToProps, { getMyCollection })(MyCollection);
+// export default UserProfile;

@@ -14,6 +14,12 @@ export const getWishList = () => async (dispatch, getState) => {
     dispatch({ type: "getWishList", payload: response.data });
   } catch (e) {
     console.log(e);
+    if (
+      e.response.data === "Invalid Token" ||
+      e.response.data === "Access denied"
+    ) {
+      history.push("/login");
+    }
   }
 };
 

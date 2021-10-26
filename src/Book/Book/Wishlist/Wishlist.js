@@ -40,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const Wishlist = (props) => {
+  const [wishBooks, setWishBooks] = useState(null);
   useEffect(() => {
     // console.log("hii from initial use effect of collection before getcollectionaction")
     props.getWishList();

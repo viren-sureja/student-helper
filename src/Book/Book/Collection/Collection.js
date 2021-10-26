@@ -8,10 +8,12 @@ import ContactUser from "../ContactUser";
 import BookNavbar from "../BookNavbar";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
+import SchoolIcon from "@material-ui/icons/School";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import BookCard from "../Card/BookCard";
+import { CircularProgress } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
   addBook: {
     display: "flex",
@@ -161,10 +163,10 @@ const Collection = (props) => {
                   value={sortType}
                   onChange={handleChange}
                 >
-                  <MenuItem value={1}>oldfirst : date</MenuItem>
-                  <MenuItem value={2}>newestfirst : date</MenuItem>
-                  <MenuItem value={3}>high-to-low : price</MenuItem>
-                  <MenuItem value={4}>low-to-high : price</MenuItem>
+                  <MenuItem value={1}>Oldest To Newest</MenuItem>
+                  <MenuItem value={2}>Newest To Oldest</MenuItem>
+                  <MenuItem value={3}>High to Low</MenuItem>
+                  <MenuItem value={4}>Low to high</MenuItem>
                 </Select>
               </FormControl>
             </div>
@@ -179,10 +181,7 @@ const Collection = (props) => {
                   value={sortType}
                   onChange={handleChange}
                 >
-                  <MenuItem value={1}>oldfirst : date</MenuItem>
-                  <MenuItem value={2}>newestfirst : date</MenuItem>
-                  <MenuItem value={3}>high-to-low : price</MenuItem>
-                  <MenuItem value={4}>low-to-high : price</MenuItem>
+                  <MenuItem value={1}>Nirma University</MenuItem>
                 </Select>
               </FormControl>
             </div>
@@ -209,14 +208,18 @@ const Collection = (props) => {
             spacing={3}
             style={{ marginBlock: "10px" }}
           >
-            {filteredCollection.map((collection) => {
-              return (
-                <Grid item key={collection._id}>
-                  <BookCard book={collection} reqDate="" tradeDate="" />
-                  {/* {card(collection)} */}
-                </Grid>
-              );
-            })}
+            {props.collection ? (
+              filteredCollection.map((collection) => {
+                return (
+                  <Grid item key={collection._id}>
+                    <BookCard book={collection} reqDate="" tradeDate="" />
+                    {/* {card(collection)} */}
+                  </Grid>
+                );
+              })
+            ) : (
+              <CircularProgress />
+            )}
           </Grid>
         </div>
       </div>

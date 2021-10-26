@@ -126,14 +126,6 @@ const AboutUs = () => {
                 </center>
               </div>
             </Grid>
-
-            <Grid item xs={12} md={4} style={{ marginBlock: "20px" }}>
-              <div data-aos="zoom-in-up">
-                <center>
-                  {card("Viren Sureja", "ICT, PDPU", "Rajkot, Gujarat")}
-                </center>
-              </div>
-            </Grid>
           </Grid>
         </Grid>
         <WhyUs />

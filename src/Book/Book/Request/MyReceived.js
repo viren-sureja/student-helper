@@ -12,6 +12,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -53,20 +54,25 @@ const MyReceived = (props) => {
           spacing={3}
           style={{ marginBlock: "10px" }}
         >
-          {props.myReceivedReq.map((myReceived) => {
-            return (
-              <Grid item key={myReceived._id}>
-                <BookCard
-                  book={myReceived.book}
-                  reqDate={myReceived.requestedAt}
-                  to=""
-                  from={myReceived.from}
-                  tradeDate=""
-                  reqId={myReceived._id}
-                />
-              </Grid>
-            );
-          })}
+          {props.myReceivedReq ? (
+            props.myReceivedReq.map((myReceived) => {
+              return (
+                <Grid item key={myReceived._id}>
+                  <BookCard
+                    book={myReceived.book}
+                    reqDate={myReceived.requestedAt}
+                    to=""
+                    from={myReceived.from}
+                    fromName={myReceived.fromName}
+                    tradeDate=""
+                    reqId={myReceived._id}
+                  />
+                </Grid>
+              );
+            })
+          ) : (
+            <CircularProgress />
+          )}
         </Grid>
       </div>
     </div>

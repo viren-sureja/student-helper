@@ -7,6 +7,8 @@ export default (state = {}, action) => {
     case "deleteRequest":
       return _.omit(state, action.payload);
     default:
+    case "logout":
+      return {};
       return state;
   }
 };

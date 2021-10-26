@@ -4,6 +4,7 @@ import axios from "../axios";
 export const getMyCollection =
   (setFilteredCollection, setAllBook) => async (dispatch, getState) => {
     try {
+      // console.log("7th");
       const token = localStorage.getItem("user");
       const currentUserId = localStorage.getItem("user_id");
       const response = await axios.get("/books/userCollection", {
@@ -14,7 +15,7 @@ export const getMyCollection =
           "auth-token": token,
         },
       });
-      console.log(response.data);
+      // console.log("17th" + response.data);
       setAllBook(response.data);
       setFilteredCollection(response.data);
       dispatch({ type: "getMyCollection", payload: response.data });
@@ -25,7 +26,35 @@ export const getMyCollection =
         e.response.data === "Invalid Token" ||
         e.response.data === "Access denied"
       ) {
-        history.push("/");
+        history.push("/login");
       }
     }
   };
+
+export const deleteInCollcetion = (book) => async (dispatch, getState) => {
+  try {
+    console.log(book);
+    const token = localStorage.getItem("user");
+    const currentUserId = localStorage.getItem("user_id");
+    const response = await axios.delete("/books/deleteBook", {
+      headers: {
+        "auth-token": token,
+      },
+      data: {
+        book: book._id,
+      },
+    });
+    // console.log(response.data);
+    dispatch({ type: "deleteInCollection", payload: book });
+    history.push("/myCollection");
+  } catch (e) {
+    console.log(e);
+    console.log(e.response.data);
+    if (
+      e.response.data === "Invalid Token" ||
+      e.response.data === "Access denied"
+    ) {
+      history.push("/");
+    }
+  }
+};

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./OptionCard.css";
+import history from "../../history";
 import Button from "@material-ui/core/Button";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 const OptionCard = (props) => {
@@ -55,6 +56,9 @@ const OptionCard = (props) => {
               // style={{ marginBlock: "5px" }}
               variant="outlined"
               className="optionCard-cardButton"
+              onClick={() => {
+                history.push(`${props.path}`);
+              }}
               endIcon={<ArrowForwardIosIcon style={{ fontSize: "15px" }} />}
             >
               {props.buttonText}

@@ -8,10 +8,12 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
+import SchoolIcon from "@material-ui/icons/School";
 import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
 import history from "../history";
 import { connect } from "react-redux";
+import { logout } from "../actions/authAction";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -101,13 +103,7 @@ const BookNavbar = (props) => {
         className={classes.appBar}
       >
         <Toolbar>
-          <img
-            src="./icon.svg"
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-            alt="React Bootstrap logo"
-          />
+          <SchoolIcon style={{ color: "black", fontSize: "30px" }} />
           <Typography
             variant="subtitle1"
             noWrap
@@ -218,7 +214,10 @@ const BookNavbar = (props) => {
                 <NavLink to="/wishlist" style={{ textDecoration: "none" }}>
                   <Typography variant="subtitle1">Wishlist</Typography>
                 </NavLink>
-                <Button
+                {/* <NavLink to="/recentUsers" style={{ textDecoration: "none" }}>
+                  <Typography variant="subtitle1">Recent Users</Typography>
+                </NavLink> */}
+                {/* <Button
                   variant="outlined"
                   style={{ marginLeft: "5px", color: "green" }}
                   onClick={() => {
@@ -226,16 +225,42 @@ const BookNavbar = (props) => {
                   }}
                 >
                   <Typography variant="subtitle1">Sign Up</Typography>
-                </Button>
-                <Button
-                  variant="outlined"
-                  style={{ marginLeft: "12px", color: "green" }}
-                  onClick={() => {
-                    history.push("/login");
-                  }}
-                >
-                  <Typography variant="subtitle1">Login</Typography>
-                </Button>
+                </Button> */}
+                {props.isSignedIn ? (
+                  <Button
+                    variant="outlined"
+                    style={{ marginLeft: "5px", color: "green" }}
+                    onClick={() => {
+                      localStorage.clear();
+                      props.logout();
+                      history.push("/");
+                      // history.push("/login");
+                    }}
+                  >
+                    <Typography variant="subtitle1">Logout</Typography>
+                  </Button>
+                ) : (
+                  <div>
+                    <Button
+                      variant="outlined"
+                      style={{ marginLeft: "5px", color: "green" }}
+                      onClick={() => {
+                        history.push("/signUp");
+                      }}
+                    >
+                      <Typography variant="subtitle1">Sign Up</Typography>
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      style={{ marginLeft: "12px", color: "green" }}
+                      onClick={() => {
+                        history.push("/login");
+                      }}
+                    >
+                      <Typography variant="subtitle1">Login</Typography>
+                    </Button>
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -251,4 +276,4 @@ const mapStateToProps = (state) => {
     isSignedIn: state.login.isSignedIn,
   };
 };
-export default connect(mapStateToProps, null)(BookNavbar);
+export default connect(mapStateToProps, { logout })(BookNavbar);

@@ -9,6 +9,7 @@ import Book from "./Book/Book";
 import ContactUser from "./Book/ContactUser";
 import "aos/dist/aos.css";
 import Home from "./Home/Home";
+import UserProfile from "./Book/ContactUser/UserProfile";
 import Trades from "./Book/Trade/Trades";
 import BookInfo from "./Book/BookInfo";
 import BookInfo1 from "./Book/BookInfo/BookInfo1";
@@ -16,6 +17,8 @@ import Request from "./Book/Request/Request";
 import MyCollection from "./Book/Collection/MyCollection";
 import Wishlist from "./Book/Wishlist/Wishlist";
 import SignUp from "./Auth/SignUp";
+// import Chat from "./Book/Chat/Chat";
+import RecentUsers from "./Book/RecentUsers/RecentUsers";
 import { connect } from "react-redux";
 import { verifyLogin } from "./actions/authAction";
 const App = (props) => {
@@ -33,6 +36,9 @@ const App = (props) => {
       <Router history={history}>
         <div>
           <Route path="/collection" exact component={Collection} />
+          {/* <Route path="/chat/:id" exact component={Chat} /> */}
+          <Route path="/userProfile/:id" exact component={UserProfile} />
+          <Route path="/recentUsers" exact component={RecentUsers} />
           <Route
             path="/addBook"
             exact
@@ -50,7 +56,7 @@ const App = (props) => {
           <Route path="/" exact component={Home} />
           <Route path="/book" exact component={Book} />
           <Route
-            path="/chat"
+            path="/chat/:id"
             exact
             // render={() => {
             //   return props.isSignedIn !== false ? (
@@ -72,8 +78,8 @@ const App = (props) => {
               );
             }}
           />
-          <Route path="/bookInfo" exact component={BookInfo} />
-          <Route path="/bookInfo1" exact component={BookInfo1} />
+          <Route path="/bookInfo/:id" exact component={BookInfo} />
+          <Route path="/bookInfo1/:id" exact component={BookInfo1} />
           {/* <Route path="/mySent" exact component={MySent} /> */}
           {/* <Route path="/myReceived" exact component={MyReceived} /> */}
           <Route

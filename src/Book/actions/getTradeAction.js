@@ -14,5 +14,11 @@ export const getTrade = () => async (dispatch, getState) => {
     dispatch({ type: "getTrade", payload: response.data });
   } catch (e) {
     console.log(e);
+    if (
+      e.response.data === "Invalid Token" ||
+      e.response.data === "Access denied"
+    ) {
+      history.push("/login");
+    }
   }
 };

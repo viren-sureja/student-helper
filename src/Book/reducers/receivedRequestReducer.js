@@ -8,6 +8,8 @@ export default (state = {}, action) => {
       return _.omit(state, action.payload);
     case "deleteRequest":
       return _.omit(state, action.payload);
+    case "logout":
+      return {};
     default:
       return state;
   }

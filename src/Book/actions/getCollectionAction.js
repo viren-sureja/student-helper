@@ -10,7 +10,8 @@ export const getCollection =
         //   "auth-token": token,
         // },
       });
-      console.log(response.data);
+      // console.log("17th" + response.data);
+      // console.log(response.data);
       setAllBook(response.data);
       setFilteredCollection(response.data);
       dispatch({ type: "getCollection", payload: response.data });

@@ -2,11 +2,11 @@ import _ from "lodash";
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case "getCollection":
+    case "getRecentUsers":
       return { ...state, ..._.mapKeys(action.payload, "_id") };
-    case "logout":
-      return {};
     default:
+    case "logout":
+      return {}
       return state;
   }
 };

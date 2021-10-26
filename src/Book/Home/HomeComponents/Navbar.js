@@ -4,12 +4,14 @@ import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import CloseIcon from "@material-ui/icons/Close";
+import SchoolIcon from "@material-ui/icons/School";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Drawer from "@material-ui/core/Drawer";
+import history from "../../history";
 import { Link as LinkS, animateScroll } from "react-scroll";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -100,13 +102,7 @@ const Navbar = () => {
         className={classes.appBar}
       >
         <Toolbar>
-          <img
-            src="./icon.svg"
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-            alt="React Bootstrap logo"
-          />
+          <SchoolIcon style={{ color: "black", fontSize: "30px" }} />
           <Typography
             variant="subtitle1"
             noWrap
@@ -232,10 +228,16 @@ const Navbar = () => {
                 <Button
                   variant="outlined"
                   style={{ marginLeft: "5px", color: "green" }}
+                  onClick={() => {
+                    history.push("/signUp");
+                  }}
                 >
                   <Typography variant="subtitle1">Sign Up</Typography>
                 </Button>
                 <Button
+                  onClick={() => {
+                    history.push("/login");
+                  }}
                   variant="outlined"
                   style={{ marginLeft: "12px", color: "green" }}
                 >

@@ -12,6 +12,8 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import BookNavbar from "../BookNavbar";
+import CircularProgress from "@material-ui/core/CircularProgress";
+
 const useStyles = makeStyles((theme) => ({}));
 
 const MySent = (props) => {
@@ -55,20 +57,26 @@ const MySent = (props) => {
           spacing={3}
           style={{ marginBlock: "10px" }}
         >
-          {props.mySentReq.map((mySent) => {
-            return (
-              <Grid item key={mySent._id}>
-                <BookCard
-                  book={mySent.book}
-                  reqDate={mySent.requestedAt}
-                  to={mySent.to}
-                  from=""
-                  tradeDate=""
-                  reqId={mySent._id}
-                />
-              </Grid>
-            );
-          })}
+          {props.mySentReq ? (
+            props.mySentReq.map((mySent) => {
+              return (
+                <Grid item key={mySent._id}>
+                  <BookCard
+                    book={mySent.book}
+                    reqDate={mySent.requestedAt}
+                    to={mySent.to}
+                    toName={mySent.toName}
+                    from=""
+                    fromName=""
+                    tradeDate=""
+                    reqId={mySent._id}
+                  />
+                </Grid>
+              );
+            })
+          ) : (
+            <CircularProgress />
+          )}
         </Grid>
       </div>
     </div>
