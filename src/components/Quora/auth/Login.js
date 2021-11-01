@@ -137,7 +137,7 @@ function Login() {
           <p>Privacy</p>
           <p>Terms</p>
           <p>Contact</p>
-          <p>&copy; Quora Fake Inc. 2021</p>
+          <p>&copy; Quora Inc. 2021</p>
         </div>
       </div>
     </div>
