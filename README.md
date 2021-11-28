@@ -12,7 +12,7 @@ Web Application for Students.
 
 # User Flow and Functionality
 
-• There are single login and register for all of the functionality<br>
+• There is single login and register for all of the functionality<br>
 • For the StudentHelper Network without login users can see all the posts on the platform but for the upvote or downvote post, comment on post they have to login.<br>
 • They will have an option to sort data according to a particular category(tag likes academics, placement, general, etc.) and also can search from the search bar and filter data for any particular university.<br>
 • They can post any questions on the platform and add tags to that question according to the relevance of the question.<br>
