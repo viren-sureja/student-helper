@@ -1,140 +1,35 @@
-<!-- PROJECT LOGO -->
-<br />
-<p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
+# Student Helper
 
-  <h3 align="center">Student Utilities</h3>
-
-  <p align="center">
-    A Project to complete Solution
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-</p>
-
-<!-- TABLE OF CONTENTS -->
-<details open="open">
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
-  </ol>
-</details>
-
-<!-- ABOUT THE PROJECT -->
-
-## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Description will come here.
-
-### Doubt - Solving
-
-The feature is basically developed to ask doubts at university scope, which is very hard to do in webApps like Quora.
-Some of the glimpse of what we have done in this feature are...
-
-1. Main Screen
-   ![](https://i.imgur.com/n2BbOit.png)
-
-2. Add question feature be like
-   ![enter image description here](https://i.imgur.com/QYgdEqb.png)
-
-3. Add answer to
-   ![enter image description here](https://i.imgur.com/sQiAq8d.png)
-
-### Built With
-
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
--   [Bootstrap](https://getbootstrap.com)
-
-<!-- GETTING STARTED -->
+Web Application for Students.
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+• Built using React, Node.js REST API, Express.js, MongoDB, Firebase.<br>
+• Three functionalities Platform for knowledge sharing, Store for trading college stuff, SPI/CPI calculator at single place.<br>
+• Filtering options like University, Tag, etc for viewing interested data.<br>
+• Integrated Google Maps for easy trading, Chat for betterinteraction.<br>
+• Managed State using Redux and followed MVC Architecture.
 
-### Prerequisites
+# User Flow and Functionality
 
-This is an example of how to list things you need to use the software and how to install them.
+• There are single login and register for all of the functionality<br>
+• For the StudentHelper Network without login users can see all the posts on the platform but for the upvote or downvote post, comment on post they have to login.<br>
+• They will have an option to sort data according to a particular category(tag likes academics, placement, general, etc.) and also can search from the search bar and filter data for any particular university.<br>
+• They can post any questions on the platform and add tags to that question according to the relevance of the question.<br>
+• For the StudentHelper Store without login users can see all the products on the platform but for the making request for any Product or To sell/buy any product they have to login.
+• They will have an option to sort data according to a price, date of product posted, category of the product, users also can search from the search bar and filter data for any particular university.<br>
+• User can make a request for a product which he/she wants to buy and the owner of the product can accept or reject the request, If he/she accepts request then all other requests on that product will automatically be deleted and that product will go to trade history of both sellers and buyers.<br>
+• For the StudentHelper Calculator there is no need to login at all, students have to simply search for the first few letters of a particular subject and they will be given auto suggestions, from that they can choose a particular subject and after that just simply enter grade they got in that subject.<br>
+• After adding all subjects they can calculate SPI/CPI with just one click.<br>
+• We also added other functionalities like Save Post, and real-time chat with other users, etc.<br>
 
--   npm
-    ```
-    npm install npm@latest -g
-    ```
 
-### Installation
+# Problems Solved
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-    ```sh
-    git clone https://github.com/your_username_/Project-Name.git
-    ```
-3. Install NPM packages
-    ```sh
-    npm install
-    ```
-4. Enter your API in `config.js`
-    ```JS
-    const API_KEY = 'ENTER YOUR API';
-    ```
-
-<!-- USAGE EXAMPLES -->
-
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<!-- ROADMAP -->
-
-## Roadmap
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<!-- LICENSE -->
-
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-<!-- CONTACT -->
+• We tried to solve three problems in a single place, which we faced as students.<br>
+• The first one was that there is not even a single platform via which students can get updated with the current activities in their college, or ask doubt regarding academics or other campus activities. So our knowledge sharing platform(StudentHelper Network is built for that).<br>
+• Second one was that we also don't have any platform for exchaingin old college stuff with seniors and juniors, What we used to do is we make whatsapp groups and via that group we contact each others, but this is not a convinenct way, because everyone has to go through all the messages and because of this some good deals might be missed. So our trading platform(StudentHelper Store is built for that).<br> 
+• The third one is that in our college we don't get directly SPI/CPI in the result, College only sends Grades of particular subjects and we have to remember credit of each subject and from that, we have to calculate SPI/CPI, It is not difficult for the current semester, but what if we want to calculate for the previous semester? It is not possible to remember the credit of every subject we studied till the date. So our SPI/CPI calculator is built for that.<br> 
 
 ## Contact
 
