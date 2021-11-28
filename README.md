@@ -28,7 +28,7 @@ Web Application for Students.
 
 • We tried to solve three problems in a single place, which we faced as students.<br>
 • The first one was that there is not even a single platform via which students can get updated with the current activities in their college, or ask doubt regarding academics or other campus activities. So our knowledge sharing platform(StudentHelper Network is built for that).<br>
-• Second one was that we also don't have any platform for exchaingin old college stuff with seniors and juniors, What we used to do is we make whatsapp groups and via that group we contact each others, but this is not a convinenct way, because everyone has to go through all the messages and because of this some good deals might be missed. So our trading platform(StudentHelper Store is built for that).<br> 
+• Second one was that we also don't have any platform for exchanging old college stuff with seniors and juniors, What we used to do is we make whatsapp groups and via that group we contact each others, but this is not a convenient way, because everyone has to go through all the messages and because of this some good deals might be missed. So our trading platform(StudentHelper Store is built for that).<br> 
 • The third one is that in our college we don't get directly SPI/CPI in the result, College only sends Grades of particular subjects and we have to remember credit of each subject and from that, we have to calculate SPI/CPI, It is not difficult for the current semester, but what if we want to calculate for the previous semester? It is not possible to remember the credit of every subject we studied till the date. So our SPI/CPI calculator is built for that.<br> 
 
 ## Contact
