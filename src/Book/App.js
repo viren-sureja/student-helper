@@ -17,6 +17,7 @@ import Request from "./Book/Request/Request";
 import MyCollection from "./Book/Collection/MyCollection";
 import Wishlist from "./Book/Wishlist/Wishlist";
 import SignUp from "./Auth/SignUp";
+import Calculator from "./Calculator/Calculator";
 // import Chat from "./Book/Chat/Chat";
 import RecentUsers from "./Book/RecentUsers/RecentUsers";
 import { connect } from "react-redux";
@@ -39,6 +40,7 @@ const App = (props) => {
           {/* <Route path="/chat/:id" exact component={Chat} /> */}
           <Route path="/userProfile/:id" exact component={UserProfile} />
           <Route path="/recentUsers" exact component={RecentUsers} />
+          <Route path="/calculator" exact component={Calculator} />
           <Route
             path="/addBook"
             exact

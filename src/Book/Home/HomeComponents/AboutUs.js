@@ -80,16 +80,26 @@ const AboutUs = () => {
             align="center"
             style={{ margin: "20px" }}
           >
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem Ipsum is that it has a more-or-less normal
-            distribution of letters, as opposed to using 'Content here, content
-            here', making it look like readable English. Many desktop publishing
-            packages and web page editors now use Lorem Ipsum as their default
-            model text, and a search for 'lorem ipsum' will uncover many web
-            sites still in their infancy. Various versions have evolved over the
-            years, sometimes by accident, sometimes on purpose (injected humour
-            and the like).
+            We at StudentHelper tries to solve the some of the problems faced by
+            the students. We tried to solve three problems in a single place,
+            which we also faced as students. The first one was that there is not
+            even a single platform via which students can get updated with the
+            current activities in their college, or ask doubt regarding
+            academics or other campus activities. So our knowledge sharing
+            platform(StudentHelper Network is built for that). Second one was
+            that we also don't have any platform for exchanging old college
+            stuff with seniors and juniors, What we used to do is we make
+            whatsapp groups and via that group we contact each others, but this
+            is not a convenient way, because everyone has to go through all the
+            messages and because of this some good deals might be missed. So our
+            trading platform(StudentHelper Store is built for that). The third
+            one is that in our college we don't get directly SPI/CPI in the
+            result, College only sends Grades of particular subjects and we have
+            to remember credit of each subject and from that, we have to
+            calculate SPI/CPI, It is not difficult for the current semester, but
+            what if we want to calculate for the previous semester? It is not
+            possible to remember the credit of every subject we studied till the
+            date. So our SPI/CPI calculator is built for that.
           </Typography>
         </div>
         <Grid container justify="center" alignItems="center">

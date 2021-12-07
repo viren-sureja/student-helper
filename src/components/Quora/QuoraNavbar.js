@@ -145,12 +145,7 @@ function QuoraNavbar({ handleUniversity, handleSavedPost, handleMyPost }) {
                     <NotificationsOutlinedIcon />
                 </div> */}
 
-        <div
-          onClick={() => {
-            history.push("/quoramain/savedPost");
-          }}
-          className="qHeader__icon"
-        >
+        <div onClick={handleSavedPost} className="qHeader__icon">
           <BookmarksIcon />
         </div>
         <div onClick={handleMyPost} className="qHeader__icon">

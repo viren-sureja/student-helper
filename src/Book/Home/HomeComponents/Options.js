@@ -39,10 +39,10 @@ const Options = () => {
               <center>
                 <OptionCard
                   optionName="StudentHelper Calculator"
-                  optionDescription="Have a question, have an idea, wants to get updated with ongoing events in the university, or want to interact with peers and grow a network within a university, StudentHelper network is the answer to these questions. Explore now and enhance your college journey."
+                  optionDescription="University don't give directly SPI/CPI!!!,Can't remember the credits of previous semester!!!!, Want to convert SPI/CPI to percentage but don't know how to do, Want to make target for upcoming semesters, Don't worry we got you covered. Our calculator has solution for all your problems."
                   buttonText="Take me there"
                   photo="./images/calculator.jpg"
-                  path="/collection"
+                  path="/calculator"
                 />
               </center>
             </Grid>
