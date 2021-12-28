@@ -10,26 +10,26 @@ Web Application for Students.
 • Integrated Google Maps for easy trading, Chat for betterinteraction.<br>
 • Managed State using Redux and followed MVC Architecture.
 
-Home | Responsive
+Home | Fully Responsive
 :-: | :-:
 <video src='https://user-images.githubusercontent.com/71123203/147477527-9d5f7a6c-9fc1-4436-87c3-aa5e656f08d8.mp4' width=180/> | <video src='https://user-images.githubusercontent.com/71123203/147477539-00a32e28-0b40-412a-856f-f425bb1739be.mp4' width=180/>
 
 
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/71123203/147478088-a3a50716-7d00-4330-b710-da4ef5f0c099.png" width="450" />
-  <img src="https://user-images.githubusercontent.com/71123203/147478094-04c18ced-b142-4e60-84c3-acb79fce40de.png" width="450"   />
+  <img src="https://user-images.githubusercontent.com/71123203/147478088-a3a50716-7d00-4330-b710-da4ef5f0c099.png" width="412" />
+  <img src="https://user-images.githubusercontent.com/71123203/147478094-04c18ced-b142-4e60-84c3-acb79fce40de.png" width="412"   />
 </p>
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/71123203/147478079-ad4479f4-4599-4100-b483-8900b0b67b67.png" width="450" />
-  <img src="https://user-images.githubusercontent.com/71123203/147478082-7b8005d8-ae81-49e4-a7d1-aa6c29e9c924.png" width="450"   />
+  <img src="https://user-images.githubusercontent.com/71123203/147478079-ad4479f4-4599-4100-b483-8900b0b67b67.png" width="412" />
+  <img src="https://user-images.githubusercontent.com/71123203/147478082-7b8005d8-ae81-49e4-a7d1-aa6c29e9c924.png" width="412"   />
 </p>
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/71123203/147478069-0befc856-371c-4e96-a630-b353f34f6a22.png" width="450" />
-  <img src="https://user-images.githubusercontent.com/71123203/147478092-8ed53577-278a-47ed-8ead-685702e0efcb.png" width="450"   />
+  <img src="https://user-images.githubusercontent.com/71123203/147478069-0befc856-371c-4e96-a630-b353f34f6a22.png" width="412" />
+  <img src="https://user-images.githubusercontent.com/71123203/147478092-8ed53577-278a-47ed-8ead-685702e0efcb.png" width="412"   />
 </p>
 <p float="left">
-  <img src="https://user-images.githubusercontent.com/71123203/147478477-011ef6b7-c5f6-4d20-93bb-ac139cd0fe75.png" width="450" />
-  <img src="https://user-images.githubusercontent.com/71123203/147478481-3b49a419-c07f-4458-bb05-87c69bbd3344.png" width="450"   />
+  <img src="https://user-images.githubusercontent.com/71123203/147478477-011ef6b7-c5f6-4d20-93bb-ac139cd0fe75.png" width="412" />
+  <img src="https://user-images.githubusercontent.com/71123203/147478481-3b49a419-c07f-4458-bb05-87c69bbd3344.png" width="412"   />
 </p>
 
 # User Flow and Functionality
@@ -44,6 +44,8 @@ Home | Responsive
 • For the StudentHelper Calculator there is no need to login at all, students have to simply search for the first few letters of a particular subject and they will be given auto suggestions, from that they can choose a particular subject and after that just simply enter grade they got in that subject.<br>
 • After adding all subjects they can calculate SPI/CPI with just one click.<br>
 • We also added other functionalities like Save Post, and real-time chat with other users, etc.<br>
+• Also integrated Nodemailer services so that users can get emails regarding important activities on the website.<br>
+• We made the whole website fully responsive so that it can adapt to any screen size.
 
 
 # Problems Solved
